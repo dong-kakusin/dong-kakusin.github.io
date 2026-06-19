@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe Trang Chủ v2 - Full Swiper & Hover Navigation</title>
+    <!-- Link Swiper CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        /* Base Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+
+        /* Wireframe Styles */
+        .placeholder-image {
+            background-color: #e9ecef;
+            border: 2px dashed #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-weight: 500;
+            position: relative;
+        }
+        .placeholder-image::before {
+            content: "❖";
+            font-size: 24px;
+            margin-right: 8px;
+            color: #adb5bd;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Global */
+        section {
+            padding: 60px 0;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: #6c757d;
+            margin: 10px auto 0;
+        }
+
+        /* Header */
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #dee2e6;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 70px;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 2px solid #333;
+            padding: 4px 12px;
+            background: #fff;
+        }
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+        nav ul li a {
+            font-weight: 500;
+            font-size: 15px;
+            color: #555;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #000;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .header-btn:hover {
+            background-color: #000;
+        }
+
+        /* Bộ chọn ngôn ngữ (Mới bổ sung) */
+        .lang-select-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            padding: 9px 30px 9px 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #495057;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .lang-select:hover {
+            border-color: #b1b5ba;
+        }
+        .lang-select:focus {
+            border-color: #6c757d;
+        }
+        /* Custom mũi tên cho thẻ select nhằm đảm bảo tính đồng bộ UI trên các trình duyệt */
+        .lang-select-wrapper::after {
+            content: "";
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #6c757d;
+            pointer-events: none;
+        }
+
+        /* Custom Swiper Navigation Arrow Styles (Ẩn mặc định, Hiện khi hover) */
+        .swiper-button-next, .swiper-button-prev {
+            color: #333 !important;
+            background: rgba(255, 255, 255, 0.85);
+            width: 45px !important;
+            height: 45px !important;
+            border-radius: 50%;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            opacity: 0;
+            transition: opacity 0.3s ease, background-color 0.2s;
+            z-index: 10;
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 18px !important;
+            font-weight: bold;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #ffffff;
+            color: #000 !important;
+        }
+        
+        /* Kích hoạt hiệu ứng hiện nút điều hướng khi hover vào vùng slider */
+        .hero:hover .swiper-button-next, .hero:hover .swiper-button-prev,
+        .products:hover .swiper-button-next, .products:hover .swiper-button-prev {
+            opacity: 1;
+        }
+
+        /* Hero Banner Swiper */
+        .hero {
+            padding: 0;
+            position: relative;
+            background-color: #f1f3f5;
+        }
+        .heroSwiper {
+            width: 100%;
+            height: 500px;
+        }
+        .hero-slide-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .hero-placeholder {
+            width: 100%;
+            height: 100%;
+            font-size: 20px;
+        }
+        .hero-text-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 2;
+            width: 90%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+        }
+        .hero-text-box h1 {
+            font-size: 34px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .hero-text-box p {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        .hero-btn {
+            display: inline-block;
+            background-color: #333;
+            color: #fff;
+            padding: 12px 30px;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+        .hero .swiper-pagination-bullet-active {
+            background: #333 !important;
+        }
+
+        /* About Us & Mission */
+        .about .about-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .about-img {
+            height: 320px;
+            width: 100%;
+        }
+        .about-text h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .about-text p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .mission-box {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+        }
+        .mission-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        /* Service */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .service-card {
+            background: #fff;
+            border: 1px solid #dee2e6;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 6px;
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+        }
+        .service-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .service-card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Products Slider */
+        .products {
+            background-color: #f8f9fa;
+            position: relative;
+        }
+        .product-slider-container {
+            position: relative;
+            padding: 0 10px;
+        }
+        .productSwiper {
+            width: 100%;
+            padding-bottom: 50px !important;
+        }
+        .product-card {
+            background: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-banner {
+            height: 200px;
+            width: 100%;
+        }
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+        .product-info h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .product-info p {
+            font-size: 14px;
+            color: #777;
+        }
+        .products .swiper-pagination-bullet-active {
+            background: #333 !important;
+        }
+
+        /* News Column */
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .news-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 20px;
+            align-items: start;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .news-date {
+            font-weight: 600;
+            color: #495057;
+            font-size: 15px;
+            padding-top: 2px;
+        }
+        .news-content h3 {
+            font-size: 18px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        .news-content p {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        /* Contact */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-group-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fafafa;
+        }
+        textarea.form-control {
+            height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 4px;
+            align-self: flex-start;
+        }
+        .contact-map {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #212529;
+            color: #f8f9fa;
+            padding: 60px 0 0 0;
+        }
+        footer .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #343a40;
+        }
+        .footer-logo-area .logo {
+            border-color: #fff;
+            color: #fff;
+            background: transparent;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .footer-logo-area p {
+            font-size: 14px;
+            color: #adb5bd;
+        }
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 18px;
+            font-weight: 600;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-col ul li a {
+            font-size: 14px;
+            color: #adb5bd;
+            transition: color 0.2s;
+        }
+        .footer-col ul li a:hover {
+            color: #ffffff;
+        }
+        .footer-col p {
+            font-size: 14px;
+            color: #adb5bd;
+            line-height: 1.5;
+        }
+
+        /* Bottom Footer (Chân trang) */
+        .footer-bottom {
+            padding: 20px 0;
+            font-size: 13px;
+            color: #6c757d;
+        }
+        .footer-bottom .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #6c757d;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover {
+            color: #adb5bd;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .about .about-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            footer .footer-top {
+                grid-template-columns: 1fr;
+            }
+            /* Trên mobile/tablet, hiện hẳn nút điều hướng để dễ bấm (không cần chờ hover) */
+            .swiper-button-next, .swiper-button-prev {
+                opacity: 1;
+                width: 38px !important;
+                height: 38px !important;
+            }
+            .swiper-button-next::after, .swiper-button-prev::after {
+                font-size: 14px !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                position: relative;
+            }
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                padding: 20px;
+                z-index: 999;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .menu-toggle {
+                display: flex;
+            }
+            .header-btn {
+                display: none;
+            }
+            .heroSwiper {
+                height: 400px;
+            }
+            .hero-text-box h1 {
+                font-size: 26px;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .news-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .footer-columns {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo">LOGO</div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Dịch vụ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="lang-select-wrapper">
+                    <select class="lang-select" aria-label="Chọn ngôn ngữ">
+                        <option value="vi">VI</option>
+                        <option value="en">EN</option>
+                        <option value="ja">JA</option>
+                        <option value="zh">ZH</option>
+                    </select>
+                </div>
+                <button class="header-btn">Liên hệ ngay</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Slider -->
+    <section class="hero">
+        <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="hero-slide-content">
+                        <div class="placeholder-image hero-placeholder">Hình ảnh Slider Banner 1</div>
+                        <div class="hero-text-box">
+                            <h1>Tiêu Đề Hero Banner 01</h1>
+                            <p>Mô tả ngắn gọn về sản phẩm hoặc chiến dịch nổi bật thứ nhất nhằm thu hút khách hàng tiềm năng.</p>
+                            <a href="#" class="hero-btn">Khám phá ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="hero-slide-content">
+                        <div class="placeholder-image hero-placeholder">Hình ảnh Slider Banner 2</div>
+                        <div class="hero-text-box">
+                            <h1>Giải Pháp Công Nghệ Mới 02</h1>
+                            <p>Giới thiệu dịch vụ chiến lược thứ hai đi kèm các thông số kỹ thuật ấn tượng trong bản wireframe này.</p>
+                            <a href="#" class="hero-btn">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="hero-slide-content">
+                        <div class="placeholder-image hero-placeholder">Hình ảnh Slider Banner 3</div>
+                        <div class="hero-text-box">
+                            <h1>Đồng Hành Cùng Doanh Nghiệp 03</h1>
+                            <p>Mô tả kịch bản sử dụng hoặc định hướng tối ưu hóa quy trình hệ thống của sản phẩm thứ ba.</p>
+                            <a href="#" class="hero-btn">Liên hệ tư vấn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Điều hướng Tên mũi tên (Ẩn, hiện khi hover vào .hero) -->
+            <div class="swiper-button-next hero-next"></div>
+            <div class="swiper-button-prev hero-prev"></div>
+            <!-- Chấm chuyển slide -->
+            <div class="swiper-pagination hero-pagination"></div>
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="about">
+        <div class="container">
+            <div class="about-wrapper">
+                <div class="placeholder-image about-img">Hình ảnh Giới thiệu</div>
+                <div class="about-text">
+                    <div class="section-title" style="text-align: left; margin-bottom: 20px; padding-bottom: 0;">Về chúng tôi</div>
+                    <p>Chia sẻ câu chuyện hình thành, năng lực cốt lõi và định hướng phát triển của doanh nghiệp nhằm tạo dựng niềm tin vững chắc với khách hàng.</p>
+                    <div class="mission-box">
+                        <h3>Sứ mệnh & Tầm nhìn</h3>
+                        <p>Mang đến những giải pháp đột phá, tối ưu hóa quy trình hiệu quả và đồng hành cùng sự phát triển bền vững của đối tác.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Dịch vụ nổi bật</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="placeholder-image service-icon"></div>
+                    <h3>Dịch vụ 01</h3>
+                    <p>Mô tả ngắn gọn các giải pháp và giá trị mang lại từ gói dịch vụ số một của công ty.</p>
+                </div>
+                <div class="service-card">
+                    <div class="placeholder-image service-icon"></div>
+                    <h3>Dịch vụ 02</h3>
+                    <p>Mô tả ngắn gọn các giải pháp và giá trị mang lại từ gói dịch vụ số hai của công ty.</p>
+                </div>
+                <div class="service-card">
+                    <div class="placeholder-image service-icon"></div>
+                    <h3>Dịch vụ 03</h3>
+                    <p>Mô tả ngắn gọn các giải pháp và giá trị mang lại từ gói dịch vụ số ba của công ty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Sản phẩm nổi bật</h2>
+            
+            <div class="product-slider-container">
+                <!-- Swiper Slider Container -->
+                <div class="swiper productSwiper">
+                    <div class="swiper-wrapper">
+                        <!-- Item 1 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 1</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 01</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 01.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 2 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 2</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 02</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 02.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 3 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 3</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 03</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 03.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 4 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 4</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 04</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 04.</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Item 5 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 1</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 05</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 05.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 6 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 2</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 06</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 06.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 7 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 3</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 07</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 07.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Item 8 -->
+                        <div class="swiper-slide">
+                            <div class="product-card">
+                                <div class="placeholder-image product-banner">Banner Sản Phẩm 4</div>
+                                <div class="product-info">
+                                    <h3>Tên Sản Phẩm 08</h3>
+                                    <p>Thông tin tóm tắt tính năng sản phẩm nổi bật 08.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Swiper Pagination -->
+                    <div class="swiper-pagination product-pagination"></div>
+                </div>
+                <!-- Điều hướng Tên mũi tên (Ẩn, hiện khi hover vào .products) -->
+                <div class="swiper-button-next product-next"></div>
+                <div class="swiper-button-prev product-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Block -->
+    <section class="news">
+        <div class="container">
+            <h2 class="section-title">Tin tức mới nhất</h2>
+            <div class="news-list">
+                <div class="news-item">
+                    <div class="news-date">2026.06.19</div>
+                    <div class="news-content">
+                        <h3>Tiêu đề bài viết nổi bật số 1</h3>
+                        <p>Đoạn mô tả ngắn gọn nội dung bài viết, giúp người đọc nắm bắt nhanh thông tin trước khi nhấp vào xem chi tiết...</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2026.06.10</div>
+                    <div class="news-content">
+                        <h3>Tiêu đề bài viết nổi bật số 2</h3>
+                        <p>Đoạn mô tả ngắn gọn nội dung bài viết, giúp người đọc nắm bắt nhanh thông tin trước khi nhấp vào xem chi tiết...</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2026.05.28</div>
+                    <div class="news-content">
+                        <h3>Tiêu đề bài viết nổi bật số 3</h3>
+                        <p>Đoạn mô tả ngắn gọn nội dung bài viết, giúp người đọc nắm bắt nhanh thông tin trước khi nhấp vào xem chi tiết...</p>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-date">2026.05.15</div>
+                    <div class="news-content">
+                        <h3>Tiêu đề bài viết nổi bật số 4</h3>
+                        <p>Đoạn mô tả ngắn gọn nội dung bài viết, giúp người đọc nắm bắt nhanh thông tin trước khi nhấp vào xem chi tiết...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Liên hệ hợp tác</h2>
+            <div class="contact-wrapper">
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-group-row">
+                        <input type="text" class="form-control" placeholder="Họ và tên">
+                        <input type="email" class="form-control" placeholder="Địa chỉ Email">
+                    </div>
+                    <input type="text" class="form-control" placeholder="Số điện thoại">
+                    <textarea class="form-control" placeholder="Nội dung lời nhắn..."></textarea>
+                    <button type="submit" class="submit-btn">Gửi thông tin</button>
+                </form>
+                <div class="placeholder-image contact-map">Bản đồ vị trí (Map PlaceHolder)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-logo-area">
+                    <div class="logo">LOGO</div>
+                    <p>Mô tả ngắn gọn về tầm nhìn thương hiệu hoặc slogan của doanh nghiệp.</p>
+                </div>
+                <div class="footer-columns">
+                    <!-- Cột dịch vụ -->
+                    <div class="footer-col">
+                        <h4>Dịch vụ</h4>
+                        <ul>
+                            <li><a href="#">Dịch vụ kỹ thuật</a></li>
+                            <li><a href="#">Giải pháp đám mây</a></li>
+                            <li><a href="#">Tư vấn chiến lược</a></li>
+                        </ul>
+                    </div>
+                    <!-- Cột công ty -->
+                    <div class="footer-col">
+                        <h4>Công ty</h4>
+                        <ul>
+                            <li><a href="#">Giới thiệu</a></li>
+                            <li><a href="#">Đội ngũ</a></li>
+                            <li><a href="#">Tuyển dụng</a></li>
+                        </ul>
+                    </div>
+                    <!-- Cột địa chỉ -->
+                    <div class="footer-col">
+                        <h4>Địa chỉ</h4>
+                        <p>Tòa nhà Công nghệ, Đường số 10, Khu Đô thị Mới, TP. Đà Nẵng.<br>Hotline: 0236-123-4567</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chân trang -->
+            <div class="footer-bottom">
+                <div class="container" style="padding: 0;">
+                    <div>© 2018 - 2026 Tên Công Ty. All rights reserved.</div>
+                    <div class="footer-links">
+                        <a href="#">Policy</a>
+                        <a href="#">Term of Service</a>
+                        <a href="#">Cookies Policy</a>
+                        <a href="#">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Link Swiper JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const heroSwiper = new Swiper('.heroSwiper', {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.hero-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.hero-next',
+                prevEl: '.hero-prev',
+            },
+        });
+
+        const productSwiper = new Swiper('.productSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: {
+                el: '.product-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.product-next',
+                prevEl: '.product-prev',
+            },
+            breakpoints: {
+                576: {
+                    slidesPerView: 2,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 25
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 30
+                }
+            }
+        });
+
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            const nav = document.querySelector('nav');
+            if (nav.style.display === 'block') {
+                nav.style.display = 'none';
+            } else {
+                nav.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
