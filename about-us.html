@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会社概要</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        background: #f8f9fa;
+        color: #333;
+        margin: 0;
+        line-height: 1.6
+      }
+
+      * {
+        box-sizing: border-box
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit
+      }
+
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px
+      }
+
+      .lang-select-wrapper {
+        position: relative;
+        display: inline-block;
+      }
+
+      .lang-select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-color: #ffffff;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        padding: 9px 30px 9px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #495057;
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .lang-select:hover {
+        border-color: #b1b5ba;
+      }
+
+      .lang-select:focus {
+        border-color: #6c757d;
+      }
+
+      .lang-select-wrapper::after {
+        content: "";
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid #6c757d;
+        pointer-events: none;
+      }
+
+      header {
+        background-color: #ffffff;
+        border-bottom: 1px solid #dee2e6;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        height: 70px;
+      }
+
+      header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: 2px solid #333;
+        padding: 4px 12px;
+        background: #fff;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 24px;
+      }
+
+      nav ul li a {
+        font-weight: 500;
+        font-size: 15px;
+        color: #555;
+        transition: color 0.3s;
+      }
+
+      nav ul li a:hover {
+        color: #000;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .header-btn {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.2s;
+      }
+
+      .header-btn:hover {
+        background-color: #000;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 40px
+      }
+
+      .hero {
+        background: #f1f3f5;
+        padding: 100px 0;
+        text-align: center
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin: 0
+      }
+
+      .hero p {
+        color: #666
+      }
+
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center
+      }
+
+      .placeholder {
+        background: #e9ecef;
+        border: 2px dashed #dee2e6;
+        height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px
+      }
+
+      .card {
+        border: 1px solid #dee2e6;
+        padding: 30px;
+        border-radius: 6px;
+        background: #fff
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px
+      }
+
+      .stat,
+      .member {
+        text-align: center;
+        border: 1px solid #dee2e6;
+        padding: 25px;
+        background: #fff
+      }
+
+      .team {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px
+      }
+
+      .member-img {
+        height: 220px;
+        background: #e9ecef;
+        margin-bottom: 15px
+      }
+
+      .info {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 10px;
+        padding: 15px;
+        border-bottom: 1px solid #eee
+      }
+
+      .cta {
+        text-align: center;
+        background: #f8f9fa;
+        padding: 50px;
+        border-radius: 6px
+      }
+
+      /* Footer */
+      footer {
+        background-color: #212529;
+        color: #f8f9fa;
+        padding: 60px 0 0 0;
+      }
+
+      footer .footer-top {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #343a40;
+      }
+
+      .footer-logo-area .logo {
+        border-color: #fff;
+        color: #fff;
+        background: transparent;
+        display: inline-block;
+        margin-bottom: 15px;
+      }
+
+      .footer-logo-area p {
+        font-size: 14px;
+        color: #adb5bd;
+      }
+
+      .footer-columns {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      .footer-col h4 {
+        font-size: 16px;
+        margin-bottom: 18px;
+        font-weight: 600;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .footer-col ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-col ul li a {
+        font-size: 14px;
+        color: #adb5bd;
+        transition: color 0.2s;
+      }
+
+      .footer-col ul li a:hover {
+        color: #ffffff;
+      }
+
+      .footer-col p {
+        font-size: 14px;
+        color: #adb5bd;
+        line-height: 1.5;
+      }
+
+      /* Bottom Footer (Chân trang) */
+      .footer-bottom {
+        padding: 20px 0;
+        font-size: 13px;
+        color: #6c757d;
+      }
+
+      .footer-bottom .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: #6c757d;
+        transition: color 0.2s;
+      }
+
+      .footer-links a:hover {
+        color: #adb5bd;
+      }
+
+      /* Mobile Menu Toggle */
+      .menu-toggle {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: #333;
+      }
+
+      /* Responsive Breakpoints */
+      @media (max-width: 992px) {
+        footer .footer-top {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media(max-width:768px) {
+        nav {
+          display: none
+        }
+
+        .grid2,
+        .cards,
+        .stats,
+        .team,
+        .timeline,
+        .footer-top,
+        .footer-columns {
+          grid-template-columns: 1fr
+        }
+
+        .hero h1 {
+          font-size: 32px
+        }
+
+        header .container {
+          position: relative;
+        }
+
+        nav {
+          display: none;
+          position: absolute;
+          top: 70px;
+          left: 0;
+          width: 100%;
+          background: #fff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 20px;
+          z-index: 999;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .menu-toggle {
+          display: flex;
+        }
+
+        .header-btn {
+          display: none;
+        }
+
+        .footer-columns {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <div class="logo">LOGO</div>
+        <button class="menu-toggle" aria-label="メニューを切り替える">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav>
+          <ul>
+            <li>
+              <a href="/index.html">ホーム</a>
+            </li>
+            <li>
+              <a href="/about-us.html">会社概要</a>
+            </li>
+            <li>
+              <a href="/services.html">サービス</a>
+            </li>
+            <li>
+              <a href="/products.html">製品情報</a>
+            </li>
+            <li>
+              <a href="/news.html">ニュース</a>
+            </li>
+            <li>
+              <a href="/contact">お問い合わせ</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <div class="lang-select-wrapper">
+            <select class="lang-select" aria-label="言語を選択">
+              <option value="ja" selected>JA</option>
+              <option value="vi">VI</option>
+              <option value="en">EN</option>
+              <option value="zh">ZH</option>
+            </select>
+          </div>
+          <button class="header-btn">お問い合わせ</button>
+        </div>
+      </div>
+    </header>
+    <section class="hero">
+      <div class="container">
+        <h1>会社概要</h1>
+        <p>お客様とともに未来を創造する</p>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">私たちについて</h2>
+        <div class="grid2">
+          <div class="placeholder">Company Image</div>
+          <div>
+            <p>私たちは革新的な技術と創造的なアイデアを通じて、お客様のビジネス成長を支援するIT企業です。</p>
+            <p>高品質なサービスと長期的なパートナーシップを提供することを使命としています。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">ミッション・ビジョン・バリュー</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Mission</h3>
+            <p>社会に価値を提供する。</p>
+          </div>
+          <div class="card">
+            <h3>Vision</h3>
+            <p>アジアを代表する企業へ。</p>
+          </div>
+          <div class="card">
+            <h3>Value</h3>
+            <p>誠実・挑戦・品質・責任</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">代表メッセージ</h2>
+        <div class="grid2">
+          <div class="placeholder">CEO</div>
+          <div>
+            <p>お客様の成功が私たちの成功です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">沿革</h2>
+        <div class="timeline">
+          <div class="card">2018 <br>設立 </div>
+          <div class="card">2019 <br>顧客獲得 </div>
+          <div class="card">2021 <br>クラウド </div>
+          <div class="card">2023 <br>海外進出 </div>
+          <div class="card">2026 <br>AI事業 </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">数字で見る私たち</h2>
+        <div class="stats">
+          <div class="stat">
+            <h3>100+</h3>社員数
+          </div>
+          <div class="stat">
+            <h3>300+</h3>案件数
+          </div>
+          <div class="stat">
+            <h3>150+</h3>顧客数
+          </div>
+          <div class="stat">
+            <h3>98%</h3>満足度
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">経営陣</h2>
+        <div class="team">
+          <div class="member">
+            <div class="member-img"></div>CEO
+          </div>
+          <div class="member">
+            <div class="member-img"></div>COO
+          </div>
+          <div class="member">
+            <div class="member-img"></div>CTO
+          </div>
+          <div class="member">
+            <div class="member-img"></div>CFO
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <h2 class="section-title">会社情報</h2>
+        <div class="info">
+          <strong>会社名</strong>
+          <span>ABC株式会社</span>
+        </div>
+        <div class="info">
+          <strong>設立</strong>
+          <span>2018年</span>
+        </div>
+        <div class="info">
+          <strong>所在地</strong>
+          <span>東京都</span>
+        </div>
+        <div class="info">
+          <strong>事業内容</strong>
+          <span>システム開発・AI・クラウド</span>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="cta">
+          <h2>採用情報</h2>
+          <p>私たちと一緒に働きませんか？</p>
+          <a class="header-btn">募集要項を見る</a>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-logo-area">
+            <div class="logo">LOGO</div>
+            <p>ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
+          </div>
+          <div class="footer-columns">
+            <!-- Cột dịch vụ -->
+            <div class="footer-col">
+              <h4>サービス</h4>
+              <ul>
+                <li>
+                  <a href="#">技術サービス</a>
+                </li>
+                <li>
+                  <a href="#">クラウドソリューション</a>
+                </li>
+                <li>
+                  <a href="#">戦略コンサルティング</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Cột công ty -->
+            <div class="footer-col">
+              <h4>企業情報</h4>
+              <ul>
+                <li>
+                  <a href="#">会社概要</a>
+                </li>
+                <li>
+                  <a href="#">チーム紹介</a>
+                </li>
+                <li>
+                  <a href="#">採用情報</a>
+                </li>
+              </ul>
+            </div>
+            <!-- Cột địa chỉ -->
+            <div class="footer-col">
+              <h4>所在地</h4>
+              <p>ダナン市 新都市区 10号通り テクノロジービル <br>代表番号: 0236-123-4567 </p>
+            </div>
+          </div>
+        </div>
+        <!-- Chân trang -->
+        <div class="footer-bottom">
+          <div class="container" style="padding: 0;">
+            <div>© 2018 - 2026 会社名. All rights reserved.</div>
+            <div class="footer-links">
+              <a href="#">プライバシーポリシー</a>
+              <a href="#">利用規約</a>
+              <a href="#">クッキーポリシー</a>
+              <a href="#">サイトマップ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    menuToggle.addEventListener('click', () => {
+      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+    });
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+        nav.style.display = 'none';
+      }
+    });
+  </script>
+</html>
