@@ -1,1006 +1,280 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wireframe Trang Chủ v2 - Full Swiper & Hover Navigation</title>
-    <!-- Link Swiper CSS CDN -->
+    <title>Wireframe Trang Chủ v2 - Full Swiper & Hover Navigation (Tailwind)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-        /* Base Reset */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        ul {
-            list-style: none;
-        }
 
-        /* Wireframe Styles */
-        .placeholder-image {
-            background-color: #e9ecef;
-            border: 2px dashed #dee2e6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-weight: 500;
-            position: relative;
-        }
-        .placeholder-image::before {
-            content: "❖";
-            font-size: 24px;
-            margin-right: 8px;
-            color: #adb5bd;
-        }
-
-        /* Container */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Section Global */
-        section {
-            padding: 60px 0;
-            background-color: #ffffff;
-            border-bottom: 1px solid #eeeeee;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 40px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background-color: #6c757d;
-            margin: 10px auto 0;
-        }
-
-        /* Header */
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid #dee2e6;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            height: 70px;
-        }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 100%;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: 2px solid #333;
-            padding: 4px 12px;
-            background: #fff;
-        }
-        nav ul {
-            display: flex;
-            gap: 24px;
-        }
-        nav ul li a {
-            font-weight: 500;
-            font-size: 15px;
-            color: #555;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: #000;
-        }
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .header-btn {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .header-btn:hover {
-            background-color: #000;
-        }
-
-        /* Bộ chọn ngôn ngữ (Mới bổ sung) */
-        .lang-select-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-        .lang-select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-color: #ffffff;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            padding: 9px 30px 9px 12px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #495057;
-            cursor: pointer;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .lang-select:hover {
-            border-color: #b1b5ba;
-        }
-        .lang-select:focus {
-            border-color: #6c757d;
-        }
-        /* Custom mũi tên cho thẻ select nhằm đảm bảo tính đồng bộ UI trên các trình duyệt */
-        .lang-select-wrapper::after {
-            content: "";
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-top: 5px solid #6c757d;
-            pointer-events: none;
-        }
-
-        /* Custom Swiper Navigation Arrow Styles (Ẩn mặc định, Hiện khi hover) */
-        .swiper-button-next, .swiper-button-prev {
-            color: #333 !important;
-            background: rgba(255, 255, 255, 0.85);
-            width: 45px !important;
-            height: 45px !important;
-            border-radius: 50%;
-            border: 1px solid #dee2e6;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            opacity: 0;
-            transition: opacity 0.3s ease, background-color 0.2s;
-            z-index: 10;
-        }
-        .swiper-button-next::after, .swiper-button-prev::after {
-            font-size: 18px !important;
-            font-weight: bold;
-        }
-        .swiper-button-next:hover, .swiper-button-prev:hover {
-            background: #ffffff;
-            color: #000 !important;
-        }
-        
-        /* Kích hoạt hiệu ứng hiện nút điều hướng khi hover vào vùng slider */
-        .hero:hover .swiper-button-next, .hero:hover .swiper-button-prev,
-        .products:hover .swiper-button-next, .products:hover .swiper-button-prev {
-            opacity: 1;
-        }
-
-        /* Hero Banner Swiper */
-        .hero {
-            padding: 0;
-            position: relative;
-            background-color: #f1f3f5;
-        }
-        .heroSwiper {
-            width: 100%;
-            height: 500px;
-        }
-        .hero-slide-content {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .hero-placeholder {
-            width: 100%;
-            height: 100%;
-            font-size: 20px;
-        }
-        .hero-text-box {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 2;
-            width: 90%;
-            max-width: 700px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-        }
-        .hero-text-box h1 {
-            font-size: 34px;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-        .hero-text-box p {
-            font-size: 15px;
-            color: #555;
-            margin-bottom: 25px;
-        }
-        .hero-btn {
-            display: inline-block;
-            background-color: #333;
-            color: #fff;
-            padding: 12px 30px;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-        .hero .swiper-pagination-bullet-active {
-            background: #333 !important;
-        }
-
-        /* About Us & Mission */
-        .about .about-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        .about-img {
-            height: 320px;
-            width: 100%;
-        }
-        .about-text h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        .about-text p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        .mission-box {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-left: 4px solid #6c757d;
-        }
-        .mission-box h3 {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-
-        /* Service */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        .service-card {
-            background: #fff;
-            border: 1px solid #dee2e6;
-            padding: 30px 20px;
-            text-align: center;
-            border-radius: 6px;
-        }
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-        }
-        .service-card h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-        }
-        .service-card p {
-            font-size: 14px;
-            color: #666;
-        }
-
-        /* Products Slider */
-        .products {
-            background-color: #f8f9fa;
-            position: relative;
-        }
-        .product-slider-container {
-            position: relative;
-            padding: 0 10px;
-        }
-        .productSwiper {
-            width: 100%;
-            padding-bottom: 50px !important;
-        }
-        .product-card {
-            background: #ffffff;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .product-banner {
-            height: 200px;
-            width: 100%;
-        }
-        .product-info {
-            padding: 20px;
-            text-align: center;
-        }
-        .product-info h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-        .product-info p {
-            font-size: 14px;
-            color: #777;
-        }
-        .products .swiper-pagination-bullet-active {
-            background: #333 !important;
-        }
-
-        /* News Column */
-        .news-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .news-item {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            border-bottom: 1px solid #e9ecef;
-            padding-bottom: 20px;
-            align-items: start;
-        }
-        .news-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-        .news-date {
-            font-weight: 600;
-            color: #495057;
-            font-size: 15px;
-            padding-top: 2px;
-        }
-        .news-content h3 {
-            font-size: 18px;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-        .news-content p {
-            font-size: 14px;
-            color: #6c757d;
-        }
-
-        /* Contact */
-        .contact-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .form-group-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ced4da;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #fafafa;
-        }
-        textarea.form-control {
-            height: 120px;
-            resize: vertical;
-        }
-        .submit-btn {
-            background-color: #333;
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            font-weight: 500;
-            cursor: pointer;
-            border-radius: 4px;
-            align-self: flex-start;
-        }
-        .contact-map {
-            width: 100%;
-            height: 100%;
-            min-height: 280px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #212529;
-            color: #f8f9fa;
-            padding: 60px 0 0 0;
-        }
-        footer .footer-top {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #343a40;
-        }
-        .footer-logo-area .logo {
-            border-color: #fff;
-            color: #fff;
-            background: transparent;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        .footer-logo-area p {
-            font-size: 14px;
-            color: #adb5bd;
-        }
-        .footer-columns {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .footer-col h4 {
-            font-size: 16px;
-            margin-bottom: 18px;
-            font-weight: 600;
-            color: #ffffff;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .footer-col ul {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .footer-col ul li a {
-            font-size: 14px;
-            color: #adb5bd;
-            transition: color 0.2s;
-        }
-        .footer-col ul li a:hover {
-            color: #ffffff;
-        }
-        .footer-col p {
-            font-size: 14px;
-            color: #adb5bd;
-            line-height: 1.5;
-        }
-
-        /* Bottom Footer (Chân trang) */
-        .footer-bottom {
-            padding: 20px 0;
-            font-size: 13px;
-            color: #6c757d;
-        }
-        .footer-bottom .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .footer-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .footer-links a {
-            color: #6c757d;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: #adb5bd;
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            background: none;
-            border: none;
-        }
-        .menu-toggle span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background-color: #333;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 992px) {
-            .about .about-wrapper {
-                grid-template-columns: 1fr;
+    <style type="text/tailwindcss">
+        @layer components {
+            .placeholder-image {
+                @apply bg-gray-200/70 border-2 border-dashed border-gray-300 flex items-center justify-center text-gray-500 font-medium relative before:content-['❖'] before:text-2xl before:mr-2 before:text-gray-400;
             }
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .contact-wrapper {
-                grid-template-columns: 1fr;
-            }
-            footer .footer-top {
-                grid-template-columns: 1fr;
-            }
-            /* Trên mobile/tablet, hiện hẳn nút điều hướng để dễ bấm (không cần chờ hover) */
-            .swiper-button-next, .swiper-button-prev {
-                opacity: 1;
-                width: 38px !important;
-                height: 38px !important;
-            }
-            .swiper-button-next::after, .swiper-button-prev::after {
-                font-size: 14px !important;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header .container {
-                position: relative;
-            }
-            nav {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background: #fff;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                padding: 20px;
-                z-index: 999;
-            }
-            nav ul {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .menu-toggle {
-                display: flex;
-            }
-            .header-btn {
-                display: none;
-            }
-            .heroSwiper {
-                height: 400px;
-            }
-            .hero-text-box h1 {
-                font-size: 26px;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            .news-item {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .footer-columns {
-                grid-template-columns: 1fr;
-                gap: 30px;
+            .section-title {
+                @apply text-2xl sm:text-3xl font-bold uppercase tracking-wide text-center mb-10 relative after:content-[''] after:block after:w-12 after:h-0.5 after:bg-gray-500 after:mx-auto after:mt-2.5;
             }
         }
     </style>
-</head>
-<body>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">LOGO</div>
-            <button class="menu-toggle" aria-label="メニューを切り替える">
-                <span></span>
-                <span></span>
-                <span></span>
+    <style>
+        .swiper-pagination-bullet-active {
+            background-color: #111827 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased font-sans leading-relaxed">
+
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 h-16 sm:h-18 flex items-center shadow-2xs">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            
+            <div class="font-bold text-xl tracking-widest uppercase border-2 border-gray-900 px-3 py-0.5 bg-white">LOGO</div>
+            
+            <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 focus:outline-none cursor-pointer" aria-label="Toggle Menu">
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
             </button>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="/index.html">ホーム</a>
-                    </li>
-                    <li>
-                        <a href="/about-us.html">会社概要</a>
-                    </li>
-                    <li>
-                        <a href="/services.html">サービス</a>
-                    </li>
-                    <li>
-                        <a href="/products.html">製品情報</a>
-                    </li>
-                    <li>
-                        <a href="/news.html">ニュース</a>
-                    </li>
-                    <li>
-                        <a href="/contact.html">お問い合わせ</a>
-                    </li>
+
+            <nav id="mobile-nav" class="hidden md:block absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-6 md:p-0 border-b md:border-none border-gray-100">
+                <ul class="flex flex-col md:flex-row gap-4 md:gap-6 text-sm font-medium text-gray-600">
+                    <li><a href="/index.html" class="border-b-2 border-black pb-1 font-bold text-black">ホーム</a></li>
+                    <li><a href="/about-us.html" class="hover:text-black transition">会社概要</a></li>
+                    <li><a href="/services.html" class="hover:text-black transition">サービス</a></li>
+                    <li><a href="/products.html" class="hover:text-black transition">製品情報</a></li>
+                    <li><a href="/news.html" class="hover:text-black transition">ニュース</a></li>
+                    <li><a href="/contact.html" class="hover:text-black transition">お問い合わせ</a></li>
                 </ul>
             </nav>
-            <div class="header-actions">
-                <div class="lang-select-wrapper">
-                    <select class="lang-select" aria-label="言語を選択">
+
+            <div class="hidden sm:flex items-center gap-3">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 rounded px-3 py-1.5 pr-8 text-xs font-medium text-gray-700 hover:border-gray-400 focus:outline-none cursor-pointer">
                         <option value="ja" selected>JA</option>
                         <option value="vi">VI</option>
                         <option value="en">EN</option>
                         <option value="zh">ZH</option>
                     </select>
+                    <svg class="w-3.5 h-3.5 text-gray-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
-                <button class="header-btn">お問い合わせ</button>
+                <button class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded text-xs font-medium transition cursor-pointer">お問い合わせ</button>
             </div>
         </div>
     </header>
 
-    <!-- Hero Banner Slider -->
-    <section class="hero">
-        <div class="swiper heroSwiper">
+    <section class="p-0 bg-gray-100 relative group">
+        <div class="swiper heroSwiper h-[400px] sm:h-[500px]">
             <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <div class="hero-slide-content">
-                        <div class="placeholder-image hero-placeholder">メインバナー画像 1</div>
-                        <div class="hero-text-box">
-                            <h1>ヒーローバナー タイトル 01</h1>
-                            <p>潜在顧客を惹きつけるための、主要な製品またはキャンペーンに関する簡単な説明文がここに入ります。</p>
-                            <a href="#" class="hero-btn">詳しく見る</a>
-                        </div>
+                <div class="swiper-slide relative">
+                    <div class="placeholder-image absolute inset-0 text-lg sm:text-xl">メインバナー画像 1</div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 w-[90%] max-w-2xl bg-white/90 backdrop-blur-xs p-6 sm:p-8 border border-gray-200 rounded shadow-sm">
+                        <h1 class="text-2xl sm:text-4xl font-bold mb-3 text-gray-900">ヒーローバナー タイトル 01</h1>
+                        <p class="text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">潜在顧客を惹きつけるための、主要な製品またはキャンペーンに関する簡単な説明文がここに入ります。</p>
+                        <a href="#" class="inline-block bg-gray-900 hover:bg-black text-white text-xs sm:text-sm px-6 py-2.5 font-medium rounded transition">詳しく見る</a>
                     </div>
                 </div>
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                    <div class="hero-slide-content">
-                        <div class="placeholder-image hero-placeholder">メインバナー画像 2</div>
-                        <div class="hero-text-box">
-                            <h1>新技術ソリューション 02</h1>
-                            <p>このワイヤーフレーム設計における、優れた技術仕様を伴う2つ目の戦略的サービスをご紹介します。</p>
-                            <a href="#" class="hero-btn">詳細を見る</a>
-                        </div>
+                <div class="swiper-slide relative">
+                    <div class="placeholder-image absolute inset-0 text-lg sm:text-xl">メインバナー画像 2</div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 w-[90%] max-w-2xl bg-white/90 backdrop-blur-xs p-6 sm:p-8 border border-gray-200 rounded shadow-sm">
+                        <h1 class="text-2xl sm:text-4xl font-bold mb-3 text-gray-900">新技術ソリューション 02</h1>
+                        <p class="text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">このワイヤーフレーム設計における、優れた技術仕様を伴う2つ目の戦略的サービスをご紹介します。</p>
+                        <a href="#" class="inline-block bg-gray-900 hover:bg-black text-white text-xs sm:text-sm px-6 py-2.5 font-medium rounded transition">詳細を見る</a>
                     </div>
                 </div>
-                <!-- Slide 3 -->
-                <div class="swiper-slide">
-                    <div class="hero-slide-content">
-                        <div class="placeholder-image hero-placeholder">メインバナー画像 3</div>
-                        <div class="hero-text-box">
-                            <h1>ビジネスパートナーとして 03</h1>
-                            <p>3つ目の製品におけるユースケース、またはシステムプロセスの最適化に向けた方向性について説明します。</p>
-                            <a href="#" class="hero-btn">無料相談はこちら</a>
-                        </div>
+                <div class="swiper-slide relative">
+                    <div class="placeholder-image absolute inset-0 text-lg sm:text-xl">メインバナー画像 3</div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 w-[90%] max-w-2xl bg-white/90 backdrop-blur-xs p-6 sm:p-8 border border-gray-200 rounded shadow-sm">
+                        <h1 class="text-2xl sm:text-4xl font-bold mb-3 text-gray-900">ビジネスパートナーとして 03</h1>
+                        <p class="text-xs sm:text-sm text-gray-600 mb-6 leading-relaxed">3つ目の製品におけるユースケース、またはシステムプロセスの最適化に向けた方向性について説明します。</p>
+                        <a href="#" class="inline-block bg-gray-900 hover:bg-black text-white text-xs sm:text-sm px-6 py-2.5 font-medium rounded transition">無料相談はこちら</a>
                     </div>
                 </div>
             </div>
-            <!-- Điều hướng Tên mũi tên (Ẩn, hiện khi hover vào .hero) -->
-            <div class="swiper-button-next hero-next"></div>
-            <div class="swiper-button-prev hero-prev"></div>
-            <!-- Chấm chuyển slide -->
+
+            <div class="swiper-button-next hero-next !text-gray-800 !bg-white/85 hover:!bg-white !w-10 !h-10 sm:!w-12 sm:!h-12 rounded-full border border-gray-200 shadow opacity-100 md:opacity-0 group-hover:opacity-100 transition duration-300 after:!text-xs sm:after:!text-sm"></div>
+            <div class="swiper-button-prev hero-prev !text-gray-800 !bg-white/85 hover:!bg-white !w-10 !h-10 sm:!w-12 sm:!h-12 rounded-full border border-gray-200 shadow opacity-100 md:opacity-0 group-hover:opacity-100 transition duration-300 after:!text-xs sm:after:!text-sm"></div>
             <div class="swiper-pagination hero-pagination"></div>
         </div>
     </section>
 
-    <!-- About Us -->
-    <section class="about">
-        <div class="container">
-            <div class="about-wrapper">
-                <div class="placeholder-image about-img">紹介画像</div>
-                <div class="about-text">
-                    <div class="section-title" style="text-align: left; margin-bottom: 20px; padding-bottom: 0;">私たちについて</div>
-                    <p>お客様との強固な信頼関係を築くため、企業の沿革、コアコンピタンス、そして今後の発展に向けたビジョンを共有します。</p>
-                    <div class="mission-box">
-                        <h3>ミッション ＆ ビジョン</h3>
-                        <p>革新的なソリューションを提供し、業務プロセスの効率化を最適化することで、パートナー企業の持続可能な成長に貢献します。</p>
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                <div class="placeholder-image h-80 w-full rounded">紹介画像</div>
+                <div>
+                    <h2 class="text-2xl font-bold mb-4 text-gray-900">私たちについて</h2>
+                    <p class="text-gray-600 mb-6 text-sm sm:text-base leading-relaxed">お客様との強固な信頼関係を築くため、企業の沿革、コアコンピタンス、そして今後の発展に向けたビジョンを共有します。</p>
+                    <div class="p-5 bg-gray-50 border-l-4 border-gray-500 rounded-r">
+                        <h3 class="font-bold text-base text-gray-900 mb-1.5">ミッション ＆ ビジョン</h3>
+                        <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">革新的なソリューションを提供し、業務プロセスの効率化を最適化することで、パートナー企業の持続可能な成長に貢献します。</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service -->
-    <section class="services">
-        <div class="container">
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">注目のサービス</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="placeholder-image service-icon"></div>
-                    <h3>サービス 01</h3>
-                    <p>当社の主要サービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white border border-gray-200 p-8 text-center rounded-lg hover:shadow-lg transition duration-200">
+                    <div class="placeholder-image w-16 h-16 mx-auto mb-5 rounded-full"></div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2.5">サービス 01</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">当社の主要サービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
                 </div>
-                <div class="service-card">
-                    <div class="placeholder-image service-icon"></div>
-                    <h3>サービス 02</h3>
-                    <p>当社の第2のサービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
+                <div class="bg-white border border-gray-200 p-8 text-center rounded-lg hover:shadow-lg transition duration-200">
+                    <div class="placeholder-image w-16 h-16 mx-auto mb-5 rounded-full"></div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2.5">サービス 02</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">当社の第2のサービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
                 </div>
-                <div class="service-card">
-                    <div class="placeholder-image service-icon"></div>
-                    <h3>サービス 03</h3>
-                    <p>当社の第3のサービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
+                <div class="bg-white border border-gray-200 p-8 text-center rounded-lg hover:shadow-lg transition duration-200">
+                    <div class="placeholder-image w-16 h-16 mx-auto mb-5 rounded-full"></div>
+                    <h3 class="font-bold text-lg text-gray-900 mb-2.5">サービス 03</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">当社の第3のサービスプランが提供するソリューションと、それによってもたらされる価値を簡潔に説明します。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Products -->
-    <section class="products">
-        <div class="container">
+    <section class="py-16 bg-gray-50 border-b border-gray-200 relative group">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">おすすめ製品</h2>
             
-            <div class="product-slider-container">
-                <!-- Swiper Slider Container -->
-                <div class="swiper productSwiper">
+            <div class="relative px-2 sm:px-4">
+                <div class="swiper productSwiper pb-14">
                     <div class="swiper-wrapper">
-                        <!-- Item 1 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 1</div>
-                                <div class="product-info">
-                                    <h3>製品名 01</h3>
-                                    <p>おすすめ製品 01 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 2</div>
-                                <div class="product-info">
-                                    <h3>製品名 02</h3>
-                                    <p>おすすめ製品 02 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 3</div>
-                                <div class="product-info">
-                                    <h3>製品名 03</h3>
-                                    <p>おすすめ製品 03 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 4 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 4</div>
-                                <div class="product-info">
-                                    <h3>製品名 04</h3>
-                                    <p>おすすめ製品 04 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                         <!-- Item 5 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 1</div>
-                                <div class="product-info">
-                                    <h3>製品名 05</h3>
-                                    <p>おすすめ製品 05 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 6 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 2</div>
-                                <div class="product-info">
-                                    <h3>製品名 06</h3>
-                                    <p>おすすめ製品 06 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 7 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 3</div>
-                                <div class="product-info">
-                                    <h3>製品名 07</h3>
-                                    <p>おすすめ製品 07 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Item 8 -->
-                        <div class="swiper-slide">
-                            <div class="product-card">
-                                <div class="placeholder-image product-banner">製品バナー 4</div>
-                                <div class="product-info">
-                                    <h3>製品名 08</h3>
-                                    <p>おすすめ製品 08 の機能や特徴の概要です。</p>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 1</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 01</h3><p class="text-xs text-gray-500">おすすめ製品 01 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 2</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 02</h3><p class="text-xs text-gray-500">おすすめ製品 02 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 3</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 03</h3><p class="text-xs text-gray-500">おすすめ製品 03 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 4</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 04</h3><p class="text-xs text-gray-500">おすすめ製品 04 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 5</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 05</h3><p class="text-xs text-gray-500">おすすめ製品 05 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 6</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 06</h3><p class="text-xs text-gray-500">おすすめ製品 06 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 7</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 07</h3><p class="text-xs text-gray-500">おすすめ製品 07 の機能概要です。</p></div></div></div>
+                        <div class="swiper-slide"><div class="bg-white border border-gray-200 rounded-lg overflow-hidden flex flex-col shadow-2xs"><div class="placeholder-image h-48 w-full">製品バナー 8</div><div class="p-5 text-center"><h3 class="font-bold text-sm text-gray-900 mb-1">製品名 08</h3><p class="text-xs text-gray-500">おすすめ製品 08 の機能概要です。</p></div></div></div>
                     </div>
-                    <!-- Swiper Pagination -->
                     <div class="swiper-pagination product-pagination"></div>
                 </div>
-                <!-- Điều hướng Tên mũi tên (Ẩn, hiện khi hover vào .products) -->
-                <div class="swiper-button-next product-next"></div>
-                <div class="swiper-button-prev product-prev"></div>
+
+                <div class="swiper-button-next product-next !text-gray-800 !bg-white/85 hover:!bg-white !w-9 !h-9 sm:!w-11 sm:!h-11 rounded-full border border-gray-200 shadow opacity-100 md:opacity-0 group-hover:opacity-100 transition duration-300 after:!text-xs sm:after:!text-sm -right-1 sm:-right-4"></div>
+                <div class="swiper-button-prev product-prev !text-gray-800 !bg-white/85 hover:!bg-white !w-9 !h-9 sm:!w-11 sm:!h-11 rounded-full border border-gray-200 shadow opacity-100 md:opacity-0 group-hover:opacity-100 transition duration-300 after:!text-xs sm:after:!text-sm -left-1 sm:-left-4"></div>
             </div>
         </div>
     </section>
 
-    <!-- Block -->
-    <section class="news">
-        <div class="container">
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">最新ニュース</h2>
-            <div class="news-list">
-                <div class="news-item">
-                    <div class="news-date">2026.06.19</div>
-                    <div class="news-content">
-                        <h3>注目の記事タイトル 1</h3>
-                        <p>記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p>
-                    </div>
+            <div class="space-y-6 divide-y divide-gray-100">
+                <div class="pt-6 first:pt-0 grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 items-start">
+                    <div class="font-semibold text-gray-700 text-xs sm:text-sm pt-0.5">2026.06.19</div>
+                    <div><h3 class="text-base font-bold text-gray-900 hover:text-blue-600 transition mb-1 cursor-pointer">注目の記事タイトル 1</h3><p class="text-xs sm:text-sm text-gray-500 leading-relaxed">記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p></div>
                 </div>
-                <div class="news-item">
-                    <div class="news-date">2026.06.10</div>
-                    <div class="news-content">
-                        <h3>注目の記事タイトル 2</h3>
-                        <p>記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p>
-                    </div>
+                <div class="pt-6 grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 items-start">
+                    <div class="font-semibold text-gray-700 text-xs sm:text-sm pt-0.5">2026.06.10</div>
+                    <div><h3 class="text-base font-bold text-gray-900 hover:text-blue-600 transition mb-1 cursor-pointer">注目の記事タイトル 2</h3><p class="text-xs sm:text-sm text-gray-500 leading-relaxed">記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p></div>
                 </div>
-                <div class="news-item">
-                    <div class="news-date">2026.05.28</div>
-                    <div class="news-content">
-                        <h3>注目の記事タイトル 3</h3>
-                        <p>記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p>
-                    </div>
+                <div class="pt-6 grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 items-start">
+                    <div class="font-semibold text-gray-700 text-xs sm:text-sm pt-0.5">2026.05.28</div>
+                    <div><h3 class="text-base font-bold text-gray-900 hover:text-blue-600 transition mb-1 cursor-pointer">注目の記事タイトル 3</h3><p class="text-xs sm:text-sm text-gray-500 leading-relaxed">記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p></div>
                 </div>
-                <div class="news-item">
-                    <div class="news-date">2026.05.15</div>
-                    <div class="news-content">
-                        <h3>注目の記事タイトル 4</h3>
-                        <p>記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p>
-                    </div>
+                <div class="pt-6 grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-1 sm:gap-6 items-start">
+                    <div class="font-semibold text-gray-700 text-xs sm:text-sm pt-0.5">2026.05.15</div>
+                    <div><h3 class="text-base font-bold text-gray-900 hover:text-blue-600 transition mb-1 cursor-pointer">注目の記事タイトル 4</h3><p class="text-xs sm:text-sm text-gray-500 leading-relaxed">記事の概要を簡潔にまとめた文章です。詳細を読む前に読者が内容を素早く把握できるようにします...</p></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact">
-        <div class="container">
+    <section class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="section-title">業務提携・お問い合わせ</h2>
-            <div class="contact-wrapper">
-                <form class="contact-form" onsubmit="event.preventDefault();">
-                    <div class="form-group-row">
-                        <input type="text" class="form-control" placeholder="お名前">
-                        <input type="email" class="form-control" placeholder="メールアドレス">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
+                <form class="flex flex-col gap-4" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded text-xs bg-gray-50 focus:bg-white focus:outline-none focus:border-gray-600 transition" placeholder="お名前">
+                        <input type="email" class="w-full p-3 border border-gray-300 rounded text-xs bg-gray-50 focus:bg-white focus:outline-none focus:border-gray-600 transition" placeholder="メールアドレス">
                     </div>
-                    <input type="text" class="form-control" placeholder="電話番号">
-                    <textarea class="form-control" placeholder="お問い合わせ内容をご記入ください..."></textarea>
-                    <button type="submit" class="submit-btn">送信する</button>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded text-xs bg-gray-50 focus:bg-white focus:outline-none focus:border-gray-600 transition" placeholder="電話番号">
+                    <textarea class="w-full p-3 border border-gray-300 rounded text-xs bg-gray-50 focus:bg-white focus:outline-none focus:border-gray-600 transition h-32 resize-y" placeholder="お問い合わせ内容をご記入ください..."></textarea>
+                    <button type="submit" class="bg-gray-900 hover:bg-black text-white px-8 py-3 rounded text-xs font-medium self-start transition cursor-pointer">送信する</button>
                 </form>
-                <div class="placeholder-image contact-map">アクセスマップ (Map PlaceHolder)</div>
+                <div class="placeholder-image min-h-[280px] rounded">アクセスマップ (Map PlaceHolder)</div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-logo-area">
-                    <div class="logo">LOGO</div>
-                    <p>ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
+    <footer class="bg-gray-900 text-gray-300 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
+                
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="inline-block border-2 border-white px-3 py-1 font-bold text-white tracking-widest text-lg">LOGO</div>
+                    <p class="text-xs text-gray-400 leading-relaxed pr-4">ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
                 </div>
-                <div class="footer-columns">
-                    <!-- Cột dịch vụ -->
-                    <div class="footer-col">
-                        <h4>サービス</h4>
-                        <ul>
-                            <li><a href="#">技術サービス</a></li>
-                            <li><a href="#">クラウドソリューション</a></li>
-                            <li><a href="#">戦略コンサルティング</a></li>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">サービス</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">技術サービス</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">クラウドソリューション</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">戦略コンサルティング</a></li>
                         </ul>
                     </div>
-                    <!-- Cột công ty -->
-                    <div class="footer-col">
-                        <h4>企業情報</h4>
-                        <ul>
-                            <li><a href="#">会社概要</a></li>
-                            <li><a href="#">チーム紹介</a></li>
-                            <li><a href="#">採用情報</a></li>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">企業情報</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">会社概要</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">チーム紹介</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">採用情報</a></li>
                         </ul>
                     </div>
-                    <!-- Cột địa chỉ -->
-                    <div class="footer-col">
-                        <h4>所在地</h4>
-                        <p>ダナン市 新都市区 10号通り テクノロジービル<br>代表番号: 0236-123-4567</p>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">所在地</h4>
+                        <p class="text-gray-400 leading-relaxed">ダナン市 新都市区 10号通り テクノロジービル<br>代表番号: 0236-123-4567</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Chân trang -->
-            <div class="footer-bottom">
-                <div class="container" style="padding: 0;">
-                    <div>© 2018 - 2026 会社名. All rights reserved.</div>
-                    <div class="footer-links">
-                        <a href="#">プライバシーポリシー</a>
-                        <a href="#">利用規約</a>
-                        <a href="#">クッキーポリシー</a>
-                        <a href="#">サイトマップ</a>
-                    </div>
+
+            <div class="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <div>© 2018 - 2026 会社名. All rights reserved.</div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#" class="hover:text-gray-200 transition">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">利用規約</a>
+                    <a href="#" class="hover:text-gray-200 transition">クッキーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">サイトマップ</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Link Swiper JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         const heroSwiper = new Swiper('.heroSwiper', {
             slidesPerView: 1,
             loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.hero-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.hero-next',
-                prevEl: '.hero-prev',
-            },
+            autoplay: { delay: 5000, disableOnInteraction: false },
+            pagination: { el: '.hero-pagination', clickable: true },
+            navigation: { nextEl: '.hero-next', prevEl: '.hero-prev' },
         });
 
         const productSwiper = new Swiper('.productSwiper', {
             slidesPerView: 1,
             spaceBetween: 20,
             loop: true,
-            pagination: {
-                el: '.product-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.product-next',
-                prevEl: '.product-prev',
-            },
+            pagination: { el: '.product-pagination', clickable: true },
+            navigation: { nextEl: '.product-next', prevEl: '.product-prev' },
             breakpoints: {
-                576: {
-                    slidesPerView: 2,
-                    spaceBetween: 20
-                },
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 25
-                },
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 30
-                }
+                576: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 25 },
+                1024: { slidesPerView: 4, spaceBetween: 30 }
             }
         });
 
-        document.querySelector('.menu-toggle').addEventListener('click', function() {
-            const nav = document.querySelector('nav');
-            if (nav.style.display === 'block') {
-                nav.style.display = 'none';
-            } else {
-                nav.style.display = 'block';
-            }
+        // Toggle mobile menu logic updated for Tailwind class
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-nav').classList.toggle('hidden');
         });
     </script>
 </body>

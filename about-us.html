@@ -1,663 +1,281 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>会社概要</title>
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        background: #f8f9fa;
-        color: #333;
-        margin: 0;
-        line-height: 1.6
-      }
+    <title>会社概要｜Example Co., Ltd.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 
-      * {
-        box-sizing: border-box
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit
-      }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px
-      }
-
-      .lang-select-wrapper {
-        position: relative;
-        display: inline-block;
-      }
-
-      .lang-select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-color: #ffffff;
-        border: 1px solid #ced4da;
-        border-radius: 4px;
-        padding: 9px 30px 9px 12px;
-        font-size: 14px;
-        font-weight: 500;
-        color: #495057;
-        cursor: pointer;
-        outline: none;
-        transition: border-color 0.2s;
-      }
-
-      .lang-select:hover {
-        border-color: #b1b5ba;
-      }
-
-      .lang-select:focus {
-        border-color: #6c757d;
-      }
-
-      .lang-select-wrapper::after {
-        content: "";
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid #6c757d;
-        pointer-events: none;
-      }
-
-      header {
-        background-color: #ffffff;
-        border-bottom: 1px solid #dee2e6;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        height: 70px;
-      }
-
-      header .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100%;
-      }
-
-      .logo {
-        font-size: 24px;
-        font-weight: bold;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        border: 2px solid #333;
-        padding: 4px 12px;
-        background: #fff;
-      }
-
-      nav ul {
-        display: flex;
-        gap: 24px;
-      }
-
-      nav ul li a {
-        font-weight: 500;
-        font-size: 15px;
-        color: #555;
-        transition: color 0.3s;
-      }
-
-      nav ul li a:hover {
-        color: #000;
-      }
-
-      .header-actions {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .header-btn {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 14px;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: background-color 0.2s;
-      }
-
-      .header-btn:hover {
-        background-color: #000;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 28px;
-        margin-bottom: 40px
-      }
-
-      .hero {
-        background: #f1f3f5;
-        padding: 100px 0;
-        text-align: center
-      }
-
-      .hero h1 {
-        font-size: 48px;
-        margin: 0
-      }
-
-      .hero p {
-        color: #666
-      }
-
-      .grid2 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: center
-      }
-
-      .placeholder {
-        background: #e9ecef;
-        border: 2px dashed #dee2e6;
-        height: 320px;
-        display: flex;
-        align-items: center;
-        justify-content: center
-      }
-
-      .cards {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px
-      }
-
-      .card {
-        border: 1px solid #dee2e6;
-        padding: 30px;
-        border-radius: 6px;
-        background: #fff
-      }
-
-      .timeline {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 15px
-      }
-
-      .stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px
-      }
-
-      .stat,
-      .member {
-        text-align: center;
-        border: 1px solid #dee2e6;
-        padding: 25px;
-        background: #fff
-      }
-
-      .team {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 20px
-      }
-
-      .member-img {
-        height: 220px;
-        background: #e9ecef;
-        margin-bottom: 15px
-      }
-
-      .info {
-        display: grid;
-        grid-template-columns: 220px 1fr;
-        gap: 10px;
-        padding: 15px;
-        border-bottom: 1px solid #eee
-      }
-
-      .cta {
-        text-align: center;
-        background: #f8f9fa;
-        padding: 50px;
-        border-radius: 6px
-      }
-
-      /* Footer */
-      footer {
-        background-color: #212529;
-        color: #f8f9fa;
-        padding: 60px 0 0 0;
-      }
-
-      footer .footer-top {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 40px;
-        padding-bottom: 40px;
-        border-bottom: 1px solid #343a40;
-      }
-
-      .footer-logo-area .logo {
-        border-color: #fff;
-        color: #fff;
-        background: transparent;
-        display: inline-block;
-        margin-bottom: 15px;
-      }
-
-      .footer-logo-area p {
-        font-size: 14px;
-        color: #adb5bd;
-      }
-
-      .footer-columns {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-      }
-
-      .footer-col h4 {
-        font-size: 16px;
-        margin-bottom: 18px;
-        font-weight: 600;
-        color: #ffffff;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      .footer-col ul {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .footer-col ul li a {
-        font-size: 14px;
-        color: #adb5bd;
-        transition: color 0.2s;
-      }
-
-      .footer-col ul li a:hover {
-        color: #ffffff;
-      }
-
-      .footer-col p {
-        font-size: 14px;
-        color: #adb5bd;
-        line-height: 1.5;
-      }
-
-      /* Bottom Footer (Chân trang) */
-      .footer-bottom {
-        padding: 20px 0;
-        font-size: 13px;
-        color: #6c757d;
-      }
-
-      .footer-bottom .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .footer-links {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .footer-links a {
-        color: #6c757d;
-        transition: color 0.2s;
-      }
-
-      .footer-links a:hover {
-        color: #adb5bd;
-      }
-
-      /* Mobile Menu Toggle */
-      .menu-toggle {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        cursor: pointer;
-        background: none;
-        border: none;
-      }
-
-      .menu-toggle span {
-        display: block;
-        width: 25px;
-        height: 3px;
-        background-color: #333;
-      }
-
-      /* Responsive Breakpoints */
-      @media (max-width: 992px) {
-        footer .footer-top {
-          grid-template-columns: 1fr;
+    <style type="text/tailwindcss">
+        @layer components {
+            .placeholder-image {
+                @apply bg-gray-200/80 border border-dashed border-gray-300 flex items-center justify-center text-gray-400 font-medium relative;
+            }
+            .section-title {
+                @apply text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-10 relative after:content-[''] after:block after:w-12 after:h-0.5 after:bg-gray-400 after:mx-auto after:mt-3;
+            }
         }
-      }
-
-      @media(max-width:768px) {
-        nav {
-          display: none
-        }
-
-        .grid2,
-        .cards,
-        .stats,
-        .team,
-        .timeline,
-        .footer-top,
-        .footer-columns {
-          grid-template-columns: 1fr
-        }
-
-        .hero h1 {
-          font-size: 32px
-        }
-
-        header .container {
-          position: relative;
-        }
-
-        nav {
-          display: none;
-          position: absolute;
-          top: 70px;
-          left: 0;
-          width: 100%;
-          background: #fff;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          padding: 20px;
-          z-index: 999;
-        }
-
-        nav ul {
-          flex-direction: column;
-          gap: 15px;
-        }
-
-        .menu-toggle {
-          display: flex;
-        }
-
-        .header-btn {
-          display: none;
-        }
-
-        .footer-columns {
-          grid-template-columns: 1fr;
-          gap: 30px;
-        }
-      }
     </style>
-  </head>
-  <body>
-    <!-- Header -->
-    <header>
-      <div class="container">
-        <div class="logo">LOGO</div>
-        <button class="menu-toggle" aria-label="メニューを切り替える">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav>
-          <ul>
-            <li>
-              <a href="/index.html">ホーム</a>
-            </li>
-            <li>
-              <a href="/about-us.html">会社概要</a>
-            </li>
-            <li>
-              <a href="/services.html">サービス</a>
-            </li>
-            <li>
-              <a href="/products.html">製品情報</a>
-            </li>
-            <li>
-              <a href="/news.html">ニュース</a>
-            </li>
-            <li>
-              <a href="/contact">お問い合わせ</a>
-            </li>
-          </ul>
-        </nav>
-        <div class="header-actions">
-          <div class="lang-select-wrapper">
-            <select class="lang-select" aria-label="言語を選択">
-              <option value="ja" selected>JA</option>
-              <option value="vi">VI</option>
-              <option value="en">EN</option>
-              <option value="zh">ZH</option>
-            </select>
-          </div>
-          <button class="header-btn">お問い合わせ</button>
+</head>
+<body class="bg-white text-gray-800 antialiased font-sans leading-relaxed">
+
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 h-16 sm:h-18 flex items-center shadow-2xs">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            
+            <div class="font-bold text-xl tracking-widest uppercase border-2 border-gray-900 px-3 py-0.5 bg-white">LOGO</div>
+            
+            <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 focus:outline-none cursor-pointer" aria-label="Toggle Menu">
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+            </button>
+
+            <nav id="mobile-nav" class="hidden md:block absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-6 md:p-0 border-b md:border-none border-gray-100">
+                <ul class="flex flex-col md:flex-row gap-4 md:gap-6 text-sm font-medium text-gray-600">
+                    <li><a href="/index.html" class="hover:text-black transition">ホーム</a></li>
+                    <li><a href="/about-us.html" class="border-b-2 border-black pb-1 font-bold text-black">会社概要</a></li>
+                    <li><a href="/services.html" class="hover:text-black transition">サービス</a></li>
+                    <li><a href="/products.html" class="hover:text-black transition">製品情報</a></li>
+                    <li><a href="/news.html" class="hover:text-black transition">ニュース</a></li>
+                    <li><a href="/contact.html" class="hover:text-black transition">お問い合わせ</a></li>
+                </ul>
+            </nav>
+
+            <div class="hidden sm:flex items-center gap-3">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 rounded px-3 py-1.5 pr-8 text-xs font-medium text-gray-700 hover:border-gray-400 focus:outline-none cursor-pointer">
+                        <option value="ja" selected>JA</option>
+                        <option value="vi">VI</option>
+                        <option value="en">EN</option>
+                        <option value="zh">ZH</option>
+                    </select>
+                    <svg class="w-3.5 h-3.5 text-gray-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <button class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded text-xs font-medium transition cursor-pointer">お問い合わせ</button>
+            </div>
         </div>
-      </div>
     </header>
-    <section class="hero">
-      <div class="container">
-        <h1>会社概要</h1>
-        <p>お客様とともに未来を創造する</p>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">私たちについて</h2>
-        <div class="grid2">
-          <div class="placeholder">Company Image</div>
-          <div>
-            <p>私たちは革新的な技術と創造的なアイデアを通じて、お客様のビジネス成長を支援するIT企業です。</p>
-            <p>高品質なサービスと長期的なパートナーシップを提供することを使命としています。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">ミッション・ビジョン・バリュー</h2>
-        <div class="cards">
-          <div class="card">
-            <h3>Mission</h3>
-            <p>社会に価値を提供する。</p>
-          </div>
-          <div class="card">
-            <h3>Vision</h3>
-            <p>アジアを代表する企業へ。</p>
-          </div>
-          <div class="card">
-            <h3>Value</h3>
-            <p>誠実・挑戦・品質・責任</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">代表メッセージ</h2>
-        <div class="grid2">
-          <div class="placeholder">CEO</div>
-          <div>
-            <p>お客様の成功が私たちの成功です。</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">沿革</h2>
-        <div class="timeline">
-          <div class="card">2018 <br>設立 </div>
-          <div class="card">2019 <br>顧客獲得 </div>
-          <div class="card">2021 <br>クラウド </div>
-          <div class="card">2023 <br>海外進出 </div>
-          <div class="card">2026 <br>AI事業 </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">数字で見る私たち</h2>
-        <div class="stats">
-          <div class="stat">
-            <h3>100+</h3>社員数
-          </div>
-          <div class="stat">
-            <h3>300+</h3>案件数
-          </div>
-          <div class="stat">
-            <h3>150+</h3>顧客数
-          </div>
-          <div class="stat">
-            <h3>98%</h3>満足度
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">経営陣</h2>
-        <div class="team">
-          <div class="member">
-            <div class="member-img"></div>CEO
-          </div>
-          <div class="member">
-            <div class="member-img"></div>COO
-          </div>
-          <div class="member">
-            <div class="member-img"></div>CTO
-          </div>
-          <div class="member">
-            <div class="member-img"></div>CFO
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <h2 class="section-title">会社情報</h2>
-        <div class="info">
-          <strong>会社名</strong>
-          <span>ABC株式会社</span>
-        </div>
-        <div class="info">
-          <strong>設立</strong>
-          <span>2018年</span>
-        </div>
-        <div class="info">
-          <strong>所在地</strong>
-          <span>東京都</span>
-        </div>
-        <div class="info">
-          <strong>事業内容</strong>
-          <span>システム開発・AI・クラウド</span>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="cta">
-          <h2>採用情報</h2>
-          <p>私たちと一緒に働きませんか？</p>
-          <a class="header-btn">募集要項を見る</a>
-        </div>
-      </div>
-    </section>
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-top">
-          <div class="footer-logo-area">
-            <div class="logo">LOGO</div>
-            <p>ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
-          </div>
-          <div class="footer-columns">
-            <!-- Cột dịch vụ -->
-            <div class="footer-col">
-              <h4>サービス</h4>
-              <ul>
-                <li>
-                  <a href="#">技術サービス</a>
-                </li>
-                <li>
-                  <a href="#">クラウドソリューション</a>
-                </li>
-                <li>
-                  <a href="#">戦略コンサルティング</a>
-                </li>
-              </ul>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="bg-gray-50 py-12 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">会社概要</h1>
+                <p class="text-sm text-gray-500">ホーム > 会社概要</p>
             </div>
-            <!-- Cột công ty -->
-            <div class="footer-col">
-              <h4>企業情報</h4>
-              <ul>
-                <li>
-                  <a href="#">会社概要</a>
-                </li>
-                <li>
-                  <a href="#">チーム紹介</a>
-                </li>
-                <li>
-                  <a href="#">採用情報</a>
-                </li>
-              </ul>
-            </div>
-            <!-- Cột địa chỉ -->
-            <div class="footer-col">
-              <h4>所在地</h4>
-              <p>ダナン市 新都市区 10号通り テクノロジービル <br>代表番号: 0236-123-4567 </p>
-            </div>
-          </div>
+            <div class="w-full md:w-64 h-32 bg-gray-200 border border-gray-300 flex items-center justify-center text-gray-400">Image</div>
         </div>
-        <!-- Chân trang -->
-        <div class="footer-bottom">
-          <div class="container" style="padding: 0;">
-            <div>© 2018 - 2026 会社名. All rights reserved.</div>
-            <div class="footer-links">
-              <a href="#">プライバシーポリシー</a>
-              <a href="#">利用規約</a>
-              <a href="#">クッキーポリシー</a>
-              <a href="#">サイトマップ</a>
+    </section>
+
+    <!-- ================= ABOUT US ================= -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="w-full h-80 bg-gray-200 border border-gray-300 flex items-center justify-center">Image</div>
+                <div>
+                    <span class="text-sm text-gray-500">私たちについて</span>
+                    <h2 class="text-2xl font-bold mt-1 mb-4">私たちはどんな会社ですか？</h2>
+                    <div class="w-12 h-0.5 bg-gray-900 mb-6"></div>
+                    <p class="text-gray-600 mb-6">私たちは、革新的な技術と創造的なアイデアで、お客様のビジネスの成長を支援するソリューションを提供します。常に、お客様とともに、より良い未来を創造していきます。</p>
+                    <button class="border border-gray-900 px-6 py-2 text-sm hover:bg-gray-900 hover:text-white transition">詳細を見る</button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <!-- ================= MISSION/VISION/VALUE ================= -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-2">ミッション・ビジョン・バリュー</h2>
+            <div class="w-12 h-0.5 bg-gray-900 mx-auto mb-12"></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6">
+                    <div class="mb-4 text-4xl">🎯</div>
+                    <h3 class="font-bold mb-4">ミッション</h3>
+                    <p class="text-sm text-gray-600">革新的な技術と高品質なサービスを通じて、お客様のビジネス価値を最大化し、社会の発展に貢献します。</p>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4 text-4xl">👁️</div>
+                    <h3 class="font-bold mb-4">ビジョン</h3>
+                    <p class="text-sm text-gray-600">テクノロジーの力で未来を切り拓き、業界をリードするグローバルカンパニーになることを目指します。</p>
+                </div>
+                <div class="p-6 text-left">
+                    <div class="mb-4 text-4xl text-center">💎</div>
+                    <h3 class="font-bold mb-4 text-center">バリュー</h3>
+                    <ul class="text-sm text-gray-600 list-disc list-inside space-y-1">
+                        <li>誠実さと信頼</li>
+                        <li>革新と挑戦</li>
+                        <li>チームワーク</li>
+                        <li>顧客第一</li>
+                        <li>成果へのこだわり</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TIMELINE ================= -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-center mb-12">会社の沿革</h2>
+            <div class="relative">
+                <div class="absolute top-5 left-0 w-full h-0.5 bg-gray-200 hidden md:block"></div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    <!-- Item -->
+                    <div class="relative text-center">
+                        <div class="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mx-auto mb-4"></div>
+                        <div class="font-bold text-lg mb-2">2010</div>
+                        <p class="text-xs text-gray-600">5名のメンバーで会社を設立。Webシステム開発事業を開始。</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative text-center">
+                        <div class="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mx-auto mb-4"></div>
+                        <div class="font-bold text-lg mb-2">2013</div>
+                        <p class="text-xs text-gray-600">モバイルアプリ開発とクラウドサービス事業を開始。</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative text-center">
+                        <div class="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mx-auto mb-4"></div>
+                        <div class="font-bold text-lg mb-2">2016</div>
+                        <p class="text-xs text-gray-600">本社を拡大移転し、従業員数が50名を超える。</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative text-center">
+                        <div class="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mx-auto mb-4"></div>
+                        <div class="font-bold text-lg mb-2">2020</div>
+                        <p class="text-xs text-gray-600">海外市場へ進出し、複数の国と地域でサービスを提供。</p>
+                    </div>
+                    <!-- Item -->
+                    <div class="relative text-center">
+                        <div class="w-4 h-4 bg-white border-2 border-gray-400 rounded-full mx-auto mb-4"></div>
+                        <div class="font-bold text-lg mb-2">2024</div>
+                        <p class="text-xs text-gray-600">新たなブランドビジョンのもと、さらなる成長と革新を目指します。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= TEAM ================= -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-center mb-12">経営陣</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Member Card -->
+                <div class="bg-white p-6 border border-gray-200 text-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                    <div class="font-bold">山田 太郎</div>
+                    <div class="text-xs text-gray-500 mb-4">代表取締役 CEO</div>
+                    <div class="flex justify-center gap-2 text-gray-400"><span>in</span> <span>✉️</span></div>
+                </div>
+                <!-- Copy as needed -->
+                <div class="bg-white p-6 border border-gray-200 text-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                    <div class="font-bold">鈴木 花子</div>
+                    <div class="text-xs text-gray-500 mb-4">取締役 COO</div>
+                    <div class="flex justify-center gap-2 text-gray-400"><span>in</span> <span>✉️</span></div>
+                </div>
+                <div class="bg-white p-6 border border-gray-200 text-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                    <div class="font-bold">田中 一郎</div>
+                    <div class="text-xs text-gray-500 mb-4">CTO</div>
+                    <div class="flex justify-center gap-2 text-gray-400"><span>in</span> <span>✉️</span></div>
+                </div>
+                <div class="bg-white p-6 border border-gray-200 text-center">
+                    <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                    <div class="font-bold">佐藤 健</div>
+                    <div class="text-xs text-gray-500 mb-4">CFO</div>
+                    <div class="flex justify-center gap-2 text-gray-400"><span>in</span> <span>✉️</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= STATS ================= -->
+    <section class="py-12 bg-white border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center"><div class="text-2xl">👥</div><div class="font-bold text-xl mt-2">100+</div><div class="text-sm">従業員数</div></div>
+            <div class="text-center"><div class="text-2xl">💼</div><div class="font-bold text-xl mt-2">200+</div><div class="text-sm">プロジェクト実績</div></div>
+            <div class="text-center"><div class="text-2xl">😊</div><div class="font-bold text-xl mt-2">150+</div><div class="text-sm">お客様</div></div>
+            <div class="text-center"><div class="text-2xl">🏆</div><div class="font-bold text-xl mt-2">10+</div><div class="text-sm">受賞歴</div></div>
+        </div>
+    </section>
+
+    <!-- ================= PARTNERS ================= -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold mb-12">パートナー・取引先</h2>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+                <div class="h-16 bg-gray-100 border border-gray-200"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-300 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="inline-block border-2 border-white px-3 py-1 font-bold text-white tracking-widest text-lg">LOGO</div>
+                    <p class="text-xs text-gray-400 leading-relaxed pr-4">ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">サービス</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">技術サービス</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">クラウドソリューション</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">戦略コンサルティング</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">企業情報</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">会社概要</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">チーム紹介</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">採用情報</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">所在地</h4>
+                        <p class="text-gray-400 leading-relaxed">ダナン市 新都市区 10号通り テクノロジービル<br>代表番号: 0236-123-4567</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <div>© 2018 - 2026 会社名. All rights reserved.</div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#" class="hover:text-gray-200 transition">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">利用規約</a>
+                    <a href="#" class="hover:text-gray-200 transition">クッキーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">サイトマップ</a>
+                </div>
+            </div>
+        </div>
     </footer>
-  </body>
-  <script>
-    // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    menuToggle.addEventListener('click', () => {
-      nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
-    });
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-        nav.style.display = 'none';
-      }
-    });
-  </script>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        // Toggle menu
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileNav.classList.toggle('hidden');
+        });
+
+        // Close outside click
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.contains(e.target) && !menuToggle.contains(e.target)) {
+                mobileNav.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
 </html>

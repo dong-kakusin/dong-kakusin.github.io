@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービス｜Example Co., Ltd.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 h-16 sm:h-18 flex items-center shadow-2xs">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            
+            <div class="font-bold text-xl tracking-widest uppercase border-2 border-gray-900 px-3 py-0.5 bg-white">LOGO</div>
+            
+            <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 focus:outline-none cursor-pointer" aria-label="Toggle Menu">
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+            </button>
+
+            <nav id="mobile-nav" class="hidden md:block absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-6 md:p-0 border-b md:border-none border-gray-100">
+                <ul class="flex flex-col md:flex-row gap-4 md:gap-6 text-sm font-medium text-gray-600">
+                    <li><a href="/index.html" class="hover:text-black transition">ホーム</a></li>
+                    <li><a href="/about-us.html" class="hover:text-black transition">会社概要</a></li>
+                    <li><a href="/services.html" class="border-b-2 border-black pb-1 font-bold text-black">サービス</a></li>
+                    <li><a href="/products.html" class="hover:text-black transition">製品情報</a></li>
+                    <li><a href="/news.html" class="hover:text-black transition">ニュース</a></li>
+                    <li><a href="/contact.html" class="hover:text-black transition">お問い合わせ</a></li>
+                </ul>
+            </nav>
+
+            <div class="hidden sm:flex items-center gap-3">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 rounded px-3 py-1.5 pr-8 text-xs font-medium text-gray-700 hover:border-gray-400 focus:outline-none cursor-pointer">
+                        <option value="ja" selected>JA</option>
+                        <option value="vi">VI</option>
+                        <option value="en">EN</option>
+                        <option value="zh">ZH</option>
+                    </select>
+                    <svg class="w-3.5 h-3.5 text-gray-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <button class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded text-xs font-medium transition cursor-pointer">お問い合わせ</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gray-100 py-8 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">サービス</h1>
+                <p class="text-xs text-gray-500 mt-2">ホーム <span class="mx-1">&gt;</span> サービス</p>
+            </div>
+            <div class="w-full md:w-64 h-20 bg-gray-200 border border-gray-300 flex items-center justify-center text-gray-400">
+                <i class="fa-regular fa-image text-2xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+        <section>
+            <div class="text-center mb-12">
+                <h2 class="text-2xl font-bold">サービス一覧</h2>
+                <div class="w-12 h-0.5 bg-black mx-auto mt-2"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="border border-gray-200 p-8 flex flex-col justify-between hover:shadow-lg transition group bg-gray-50/50">
+                    <div>
+                        <i class="fa-solid fa-desktop text-4xl text-gray-700 mb-6 block"></i>
+                        <h3 class="font-bold text-lg mb-3">Web開発</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">企業の課題を解決する高品質なWebサイト・システムを開発します。</p>
+                    </div>
+                    <a href="#" class="mt-8 text-xs font-bold flex items-center gap-2 group-hover:translate-x-1 transition">
+                        詳細を見る <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="border border-gray-200 p-8 flex flex-col justify-between hover:shadow-lg transition group bg-white shadow-sm">
+                    <div>
+                        <i class="fa-solid fa-mobile-screen text-4xl text-gray-700 mb-6 block"></i>
+                        <h3 class="font-bold text-lg mb-3">アプリ開発</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">iOS / Android 向けのモバイルアプリを企画・開発します。</p>
+                    </div>
+                    <a href="#" class="mt-8 text-xs font-bold flex items-center gap-2 group-hover:translate-x-1 transition">
+                        詳細を見る <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="border border-gray-200 p-8 flex flex-col justify-between hover:shadow-lg transition group bg-gray-50/50">
+                    <div>
+                        <i class="fa-solid fa-cloud text-4xl text-gray-700 mb-6 block"></i>
+                        <h3 class="font-bold text-lg mb-3">クラウド・インフラ</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">最適なクラウド環境の設計・構築・運用でビジネスの成長を支援します。</p>
+                    </div>
+                    <a href="#" class="mt-8 text-xs font-bold flex items-center gap-2 group-hover:translate-x-1 transition">
+                        詳細を見る <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+            <div class="lg:col-span-5 bg-gray-200 border border-gray-300 min-h-[300px] flex items-center justify-center text-gray-400">
+                <i class="fa-regular fa-image text-6xl"></i>
+            </div>
+
+            <div class="lg:col-span-4 flex flex-col justify-between space-y-6">
+                <div>
+                    <h3 class="text-xl font-bold border-b pb-3 mb-4">Web開発</h3>
+                    <p class="text-xs text-gray-600 mb-6 leading-relaxed">
+                        お客様のビジネス目標を実現するために、企画・設計から開発、運用までワンストップでご提供します。
+                    </p>
+                    <ul class="space-y-3 text-xs font-medium">
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> 要件定義・コンサルティング</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> UI/UX設計</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> フロントエンド開発</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> バックエンド開発</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> テスト・品質保証</li>
+                        <li class="flex items-center gap-2.5"><i class="fa-regular fa-circle-check text-base"></i> 運用・保守サポート</li>
+                    </ul>
+                </div>
+                <button class="border border-black font-bold text-xs py-3 px-6 w-44 hover:bg-black hover:text-white transition">
+                    お問い合わせ
+                </button>
+            </div>
+
+            <div class="lg:col-span-3 bg-gray-50 border border-gray-200 p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center gap-3 mb-6 border-b pb-3">
+                        <div class="w-10 h-10 rounded-full border border-black flex items-center justify-center">
+                            <i class="fa-regular fa-star text-lg"></i>
+                        </div>
+                        <span class="font-bold text-sm">特長</span>
+                    </div>
+                    <ul class="space-y-3.5 text-xs">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 高い技術力</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 柔軟な開発体制</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 品質へのこだわり</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 最新技術の活用</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 納期厳守</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-gray-400"></i> 安心のサポート体制</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-16">
+                <h2 class="text-xl font-bold">サービス提供の流れ</h2>
+            </div>
+
+            <div class="relative">
+                <div class="hidden md:block absolute top-10 left-[10%] right-[10%] h-[1px] border-b border-dashed border-gray-400 -z-0"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative z-10">
+                    <div class="flex flex-col items-center text-center bg-white">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fa-regular fa-clipboard text-2xl text-gray-600"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-400 tracking-widest">01</span>
+                        <h4 class="font-bold text-xs my-1">ヒアリング</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 max-w-[160px]">お客様の課題やご要望を詳しくお伺いします。</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center bg-white">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fa-solid fa-file-invoice-dollar text-2xl text-gray-600"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-400 tracking-widest">02</span>
+                        <h4 class="font-bold text-xs my-1">ご提案・お見積り</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 max-w-[160px]">最適なプランとお見積りをご提案します。</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center bg-white">
+                        <div class="w-20 h-20 rounded-full border-2 border-black bg-white flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fa-solid fa-code text-2xl text-black"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-black tracking-widest">03</span>
+                        <h4 class="font-bold text-xs my-1 text-black">設計・開発</h4>
+                        <p class="text-[11px] text-gray-700 mt-1 max-w-[160px]">設計に基づき、開発・実装を進めます。</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center bg-white">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fa-regular fa-circle-check text-2xl text-gray-600"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-400 tracking-widest">04</span>
+                        <h4 class="font-bold text-xs my-1">テスト・検証</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 max-w-[160px]">品質を徹底し、テストを徹底します。</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center bg-white">
+                        <div class="w-20 h-20 rounded-full border border-gray-300 bg-white flex items-center justify-center mb-3 shadow-sm">
+                            <i class="fa-solid fa-rocket text-2xl text-gray-600"></i>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-400 tracking-widest">05</span>
+                        <h4 class="font-bold text-xs my-1">納品・サポート</h4>
+                        <p class="text-[11px] text-gray-500 mt-1 max-w-[160px]">納品後も運用・保守で継続的にサポートします。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-8">
+                <h2 class="text-base font-bold">主な使用技術</h2>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">React</span>
+                </div>
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">Vue.js</span>
+                </div>
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">Laravel</span>
+                </div>
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">AWS</span>
+                </div>
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">Docker</span>
+                </div>
+                <div class="border border-gray-200 py-6 flex flex-col items-center justify-center gap-2">
+                    <div class="w-12 h-8 bg-gray-100 border flex items-center justify-center text-[10px] text-gray-400">ロゴ</div>
+                    <span class="text-xs font-bold">MySQL</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-8">
+                <h2 class="text-base font-bold">導入実績</h2>
+            </div>
+            
+            <div class="relative flex items-center">
+                <button class="absolute -left-4 md:-left-12 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow flex items-center justify-center hover:bg-gray-50 transition">
+                    <i class="fa-solid fa-angle-left text-gray-600"></i>
+                </button>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+                    <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50">
+                        <div>
+                            <div class="h-28 bg-gray-200 border border-gray-300 mb-4 flex items-center justify-center text-gray-400">
+                                <i class="fa-regular fa-image text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs mb-2">プロジェクト名 1</h4>
+                            <span class="text-[10px] bg-white border px-1.5 py-0.5 text-gray-600 mb-2 inline-block">業種：EC・小売</span>
+                            <p class="text-[11px] text-gray-600 leading-tight">大規模ECサイトの新規構築を支援<br>売上向上と運用効率化を実現。</p>
+                        </div>
+                        <a href="#" class="mt-6 text-xs font-bold flex items-center gap-1.5">
+                            詳細を見る <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50">
+                        <div>
+                            <div class="h-28 bg-gray-200 border border-gray-300 mb-4 flex items-center justify-center text-gray-400">
+                                <i class="fa-regular fa-image text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs mb-2">プロジェクト名 2</h4>
+                            <span class="text-[10px] bg-white border px-1.5 py-0.5 text-gray-600 mb-2 inline-block">業種：教育・研修</span>
+                            <p class="text-[11px] text-gray-600 leading-tight">学習管理システムの開発を担当<br>受講者管理の効率化に貢献。</p>
+                        </div>
+                        <a href="#" class="mt-6 text-xs font-bold flex items-center gap-1.5">
+                            詳細を見る <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50">
+                        <div>
+                            <div class="h-28 bg-gray-200 border border-gray-300 mb-4 flex items-center justify-center text-gray-400">
+                                <i class="fa-regular fa-image text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs mb-2">プロジェクト名 3</h4>
+                            <span class="text-[10px] bg-white border px-1.5 py-0.5 text-gray-600 mb-2 inline-block">業種：金融・保険</span>
+                            <p class="text-[11px] text-gray-600 leading-tight">業務システムの刷新を支援<br>セキュリティと操作性を向上。</p>
+                        </div>
+                        <a href="#" class="mt-6 text-xs font-bold flex items-center gap-1.5">
+                            詳細を見る <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+
+                    <div class="border border-gray-200 p-5 flex flex-col justify-between bg-gray-50/50">
+                        <div>
+                            <div class="h-28 bg-gray-200 border border-gray-300 mb-4 flex items-center justify-center text-gray-400">
+                                <i class="fa-regular fa-image text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-xs mb-2">プロジェクト名 4</h4>
+                            <span class="text-[10px] bg-white border px-1.5 py-0.5 text-gray-600 mb-2 inline-block">業種：製造</span>
+                            <p class="text-[11px] text-gray-600 leading-tight">IoT連携プラットフォームを構築<br>データ可視化で生産性を向上。</p>
+                        </div>
+                        <a href="#" class="mt-6 text-xs font-bold flex items-center gap-1.5">
+                            詳細を見る <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="absolute -right-4 md:-right-12 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow flex items-center justify-center hover:bg-gray-50 transition">
+                    <i class="fa-solid fa-angle-right text-gray-600"></i>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <section class="bg-gray-100 border-t border-b border-gray-200 py-10 mt-16">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+            <div class="flex items-center gap-4">
+                <i class="fa-regular fa-comment-dots text-4xl text-gray-600 hidden sm:inline-block"></i>
+                <div>
+                    <h3 class="font-bold text-base">サービスについて相談したいですか？</h3>
+                    <p class="text-xs text-gray-500 mt-0.5">専門の担当者が、お客様の課題解決をサポートします。</p>
+                </div>
+            </div>
+            <a href="#" class="bg-gray-900 hover:bg-gray-800 text-white px-8 py-3 rounded text-xs font-medium whitespace-nowrap transition">
+                お問い合わせ
+            </a>
+        </div>
+    </section>
+
+   <footer class="bg-gray-900 text-gray-300 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
+                
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="inline-block border-2 border-white px-3 py-1 font-bold text-white tracking-widest text-lg">LOGO</div>
+                    <p class="text-xs text-gray-400 leading-relaxed pr-4">ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">サービス</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">技術サービス</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">クラウドソリューション</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">戦略コンサルティング</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">企業情報</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">会社概要</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">チーム紹介</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">採用情報</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">所在地</h4>
+                        <p class="text-gray-400 leading-relaxed">ダナン市 新都市区 10号通り テクノロジービル<br>代表番号: 0236-123-4567</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <div>© 2018 - 2026 会社名. All rights reserved.</div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#" class="hover:text-gray-200 transition">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">利用規約</a>
+                    <a href="#" class="hover:text-gray-200 transition">クッキーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">サイトマップ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            document.getElementById('mobile-nav').classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>

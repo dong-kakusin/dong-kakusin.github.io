@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ニュース詳細｜Example Co., Ltd.</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans JP', sans-serif; }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+    <!-- ================= HEADER ================= -->
+   <header class="bg-white border-b border-gray-200 sticky top-0 z-50 h-16 sm:h-18 flex items-center shadow-2xs">
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            
+            <div class="font-bold text-xl tracking-widest uppercase border-2 border-gray-900 px-3 py-0.5 bg-white">LOGO</div>
+            
+            <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 focus:outline-none cursor-pointer" aria-label="Toggle Menu">
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+                <span class="w-6 h-0.5 bg-gray-800 block"></span>
+            </button>
+
+            <nav id="mobile-nav" class="hidden md:block absolute md:relative top-full left-0 w-full md:w-auto bg-white md:bg-transparent shadow-md md:shadow-none p-6 md:p-0 border-b md:border-none border-gray-100">
+                <ul class="flex flex-col md:flex-row gap-4 md:gap-6 text-sm font-medium text-gray-600">
+                    <li><a href="/index.html" class="hover:text-black transition">ホーム</a></li>
+                    <li><a href="/about-us.html" class="hover:text-black transition">会社概要</a></li>
+                    <li><a href="/services.html" class="hover:text-black transition">サービス</a></li>
+                    <li><a href="/products.html" class="hover:text-black transition">製品情報</a></li>
+                    <li><a href="/news.html" class="border-b-2 border-black pb-1 font-bold text-black">ニュース</a></li>
+                    <li><a href="/contact.html" class="hover:text-black transition">お問い合わせ</a></li>
+                </ul>
+            </nav>
+
+            <div class="hidden sm:flex items-center gap-3">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-300 rounded px-3 py-1.5 pr-8 text-xs font-medium text-gray-700 hover:border-gray-400 focus:outline-none cursor-pointer">
+                        <option value="ja" selected>JA</option>
+                        <option value="vi">VI</option>
+                        <option value="en">EN</option>
+                        <option value="zh">ZH</option>
+                    </select>
+                    <svg class="w-3.5 h-3.5 text-gray-500 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+                <button class="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded text-xs font-medium transition cursor-pointer">お問い合わせ</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= SUB-HERO (PAGE TITLE & BREADCRUMB) ================= -->
+    <section class="bg-gray-100 py-8 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">ニュース</h1>
+                <p class="text-xs text-gray-500 mt-2">
+                    ホーム <span class="mx-1.5">&gt;</span> 
+                    <a href="news.html" class="hover:underline">ニュース</a> <span class="mx-1.5">&gt;</span> 
+                    <span class="text-gray-800">ニュース詳細</span>
+                </p>
+            </div>
+            <!-- Banner Placeholder -->
+            <div class="w-full md:w-64 h-20 bg-gray-200 border border-gray-300 flex items-center justify-center text-gray-400">
+                <i class="fa-regular fa-image text-2xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= MAIN CONTENT AREA ================= -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+
+            <!-- LEFT COLUMN: ARTICLE DETAILS (Span 8/12) -->
+            <div class="lg:col-span-8">
+                
+                <!-- Article Header -->
+                <div class="border-b border-gray-200 pb-6 mb-6">
+                    <div class="text-xs text-gray-500 mb-2.5"><span class="font-bold text-gray-800">お知らせ</span> <span class="mx-2">|</span> 2024/05/20</div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 leading-snug mb-6">ゴールデンウィーク休業のお知らせ</h1>
+                    
+                    <!-- Share Buttons -->
+                    <div class="flex items-center space-x-2.5">
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-800 text-white flex items-center justify-center text-xs transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-800 text-white flex items-center justify-center text-xs transition"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-800 text-white flex items-center justify-center text-xs transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <button class="w-8 h-8 rounded-full bg-gray-600 hover:bg-gray-800 text-white flex items-center justify-center text-xs transition" title="URLをコピー"><i class="fa-solid fa-link"></i></button>
+                    </div>
+                </div>
+
+                <!-- Big Featured Image -->
+                <div class="w-full h-64 sm:h-96 bg-gray-200 border border-gray-300 mb-8 flex items-center justify-center text-gray-400">
+                    <i class="fa-regular fa-image text-5xl"></i>
+                </div>
+
+                <!-- Article Body Content -->
+                <div class="space-y-6 text-sm sm:text-base text-gray-800 leading-relaxed">
+                    <p>平素より格別のご愛顧を賜り、誠にありがとうございます。</p>
+                    <p>誠に勝タながら、当社は以下の期間をゴールデンウィーク休業とさせていただきます。</p>
+
+                    <!-- Highlighted Box (休業期間) -->
+                    <div class="border border-gray-300 py-8 px-4 text-center my-8 bg-gray-50/30">
+                        <span class="text-xs font-bold text-gray-600 block mb-3 tracking-widest">休業期間</span>
+                        <p class="text-base sm:text-xl font-bold text-gray-900 tracking-wide">2024年5月3日（金）〜 2024年5月6日（月）</p>
+                    </div>
+
+                    <!-- Heading H2 - Type 1 -->
+                    <h2 class="text-lg sm:text-xl font-bold text-gray-900 border-l-4 border-black pl-3 py-0.5 mt-10 mb-4">
+                        休業期間中のお問い合わせについて
+                    </h2>
+                    <p class="text-sm sm:text-base leading-relaxed text-gray-700">
+                        休業期間中にいただきましたお問い合わせにつきましては、<br>
+                        2024年5月7日（火）より順次対応させていただきます。<br>
+                        ご不便をおかけいたしますが、何卒ご理解賜りますようお願い申し上げます。
+                    </p>
+
+                    <!-- Heading H2 - Type 2 -->
+                    <h2 class="text-lg sm:text-xl font-bold text-gray-900 border-l-4 border-black pl-3 py-0.5 mt-10 mb-4">
+                        ご利用中のお客さまへ
+                    </h2>
+                    <p class="text-sm sm:text-base leading-relaxed text-gray-700 mb-6">
+                        休業期間中も、システムの監視および保守対応は行っておりますが、<br>
+                        緊急のご連絡はサポート窓口までお願いいたします。
+                    </p>
+
+                    <!-- Callout Contact Box -->
+                    <div class="border border-gray-200 bg-gray-50 p-6 flex flex-col sm:flex-row items-center gap-5 my-6">
+                        <div class="w-14 h-14 rounded-full bg-white border border-gray-300 flex items-center justify-center text-gray-800 shrink-0 shadow-sm">
+                            <i class="fa-solid fa-headset text-2xl"></i>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <div class="text-xs font-bold text-gray-900 mb-1">サポート窓口 (24時間対応)</div>
+                            <div class="text-sm font-bold text-gray-800 tracking-wide">
+                                03-1234-5678 <span class="text-xs font-normal text-gray-500 mx-1">または</span> support@example.co.jp
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Footer / Sign-off -->
+                    <div class="pt-6 space-y-4 text-sm text-gray-700">
+                        <p>今後とも変わらぬご支援を賜りますよう、よろしくお願い申し上げます。</p>
+                        <div class="pt-4 leading-loose font-medium">
+                            株式会社サンプル<br>
+                            2024年5月20日
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Bottom Navigation (Prev / Next) -->
+                <div class="border-t border-gray-200 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                    <!-- Prev -->
+                    <a href="#" class="group flex items-center gap-3 w-full sm:w-1/2 pr-2">
+                        <i class="fa-solid fa-angle-left text-gray-400 group-hover:-translate-x-1 transition shrink-0 text-base"></i>
+                        <div class="min-w-0">
+                            <span class="text-[10px] text-gray-400 block mb-0.5 font-medium">前の記事</span>
+                            <p class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition truncate">新サービス「クラウド管理プラットフォーム」を提供開始</p>
+                        </div>
+                    </a>
+
+                    <!-- Next -->
+                    <a href="#" class="group flex items-center sm:justify-end gap-3 w-full sm:w-1/2 sm:text-right pl-0 sm:pl-2">
+                        <div class="min-w-0 flex-1 sm:flex-initial order-2 sm:order-1">
+                            <span class="text-[10px] text-gray-400 block mb-0.5 font-medium">次の記事</span>
+                            <p class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition truncate">【開催レポート】DX推進セミナー 2024 春</p>
+                        </div>
+                        <i class="fa-solid fa-angle-right text-gray-400 group-hover:translate-x-1 transition shrink-0 order-1 sm:order-2 text-base"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN: SIDEBAR (Span 4/12) -->
+            <div class="lg:col-span-4 space-y-8">
+                
+                <!-- Sidebar Widget 1: Search -->
+                <div class="bg-gray-50 border border-gray-200 p-6">
+                    <h3 class="font-bold text-sm mb-4">検索<span class="block w-6 h-0.5 bg-black mt-1.5"></span></h3>
+                    <div class="relative">
+                        <input type="text" placeholder="キーワードを入力" class="w-full bg-white border border-gray-300 rounded text-xs py-2.5 pl-3 pr-9 focus:outline-none focus:border-gray-500">
+                        <button class="absolute right-2.5 top-2.5 text-gray-400 hover:text-black transition">
+                            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sidebar Widget 2: Categories -->
+                <div class="bg-gray-50 border border-gray-200 p-6">
+                    <h3 class="font-bold text-sm mb-4">カテゴリ<span class="block w-6 h-0.5 bg-black mt-1.5"></span></h3>
+                    <ul class="space-y-2.5 text-xs">
+                        <li>
+                            <a href="#" class="flex items-center justify-between py-1 text-gray-700 hover:text-black hover:translate-x-1 transition duration-150">
+                                <span><i class="fa-solid fa-angle-right text-gray-400 mr-2"></i> すべて</span>
+                                <span class="text-gray-400">(120)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between py-1 text-gray-700 hover:text-black hover:translate-x-1 transition duration-150">
+                                <span><i class="fa-solid fa-angle-right text-gray-400 mr-2"></i> お知らせ</span>
+                                <span class="text-gray-400">(35)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between py-1 text-gray-700 hover:text-black hover:translate-x-1 transition duration-150">
+                                <span><i class="fa-solid fa-angle-right text-gray-400 mr-2"></i> プレスリリース</span>
+                                <span class="text-gray-400">(28)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between py-1 text-gray-700 hover:text-black hover:translate-x-1 transition duration-150">
+                                <span><i class="fa-solid fa-angle-right text-gray-400 mr-2"></i> イベント</span>
+                                <span class="text-gray-400">(28)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-center justify-between py-1 text-gray-700 hover:text-black hover:translate-x-1 transition duration-150">
+                                <span><i class="fa-solid fa-angle-right text-gray-400 mr-2"></i> コラム</span>
+                                <span class="text-gray-400">(29)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Sidebar Widget 3: Popular Articles -->
+                <div class="border border-gray-200 p-6 bg-white">
+                    <h3 class="font-bold text-sm mb-5">人気記事<span class="block w-6 h-0.5 bg-black mt-1.5"></span></h3>
+                    <div class="space-y-4">
+                        <a href="#" class="flex gap-3 items-start group">
+                            <div class="w-16 h-16 bg-gray-200 border border-gray-300 shrink-0 flex items-center justify-center text-gray-400 overflow-hidden">
+                                <i class="fa-regular fa-image text-sm group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition line-clamp-2 leading-snug">DX推進における課題と解決策を徹底解説</h4>
+                                <span class="text-[10px] text-gray-400 mt-1 block">2024/04/12</span>
+                            </div>
+                        </a>
+                        <a href="#" class="flex gap-3 items-start group">
+                            <div class="w-16 h-16 bg-gray-200 border border-gray-300 shrink-0 flex items-center justify-center text-gray-400 overflow-hidden">
+                                <i class="fa-regular fa-image text-sm group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition line-clamp-2 leading-snug">クラウド導入のメリットと注意点</h4>
+                                <span class="text-[10px] text-gray-400 mt-1 block">2024/03/25</span>
+                            </div>
+                        </a>
+                        <a href="#" class="flex gap-3 items-start group">
+                            <div class="w-16 h-16 bg-gray-200 border border-gray-300 shrink-0 flex items-center justify-center text-gray-400 overflow-hidden">
+                                <i class="fa-regular fa-image text-sm group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition line-clamp-2 leading-snug">ゼロトラストセキュリティとは？基礎から解説</h4>
+                                <span class="text-[10px] text-gray-400 mt-1 block">2024/03/15</span>
+                            </div>
+                        </a>
+                        <a href="#" class="flex gap-3 items-start group">
+                            <div class="w-16 h-16 bg-gray-200 border border-gray-300 shrink-0 flex items-center justify-center text-gray-400 overflow-hidden">
+                                <i class="fa-regular fa-image text-sm group-hover:scale-110 transition"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="text-xs font-bold text-gray-800 group-hover:text-blue-600 transition line-clamp-2 leading-snug">業務効率化を実現する最新ツール5選</h4>
+                                <span class="text-[10px] text-gray-400 mt-1 block">2024/02/28</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Widget 4 (NEW): Tags -->
+                <div class="bg-gray-50 border border-gray-200 p-6">
+                    <h3 class="font-bold text-sm mb-4">タグ<span class="block w-6 h-0.5 bg-black mt-1.5"></span></h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">クラウド</a>
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">DX</a>
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">セキュリティ</a>
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">お知らせ</a>
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">イベント</a>
+                        <a href="#" class="bg-white border border-gray-300 hover:border-black text-gray-700 hover:text-black px-3 py-1.5 rounded text-xs transition">システム開発</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ================= PRE-FOOTER CTA (NEWSLETTER) ================= -->
+    <section class="bg-gray-100 border-t border-b border-gray-200 py-12 mt-16">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="flex items-center gap-4">
+                <div class="w-14 h-14 rounded-full bg-white border border-gray-300 flex items-center justify-center shrink-0 shadow-sm hidden sm:flex">
+                    <i class="fa-regular fa-envelope text-2xl text-gray-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-base text-gray-900">最新ニュースをメールで受け取る</h3>
+                    <p class="text-xs text-gray-500 mt-1">お知らせやイベント情報など、最新の情報をお届けします。</p>
+                </div>
+            </div>
+            <form class="flex w-full sm:w-auto gap-2 justify-center">
+                <input type="email" placeholder="メールアドレスを入力" class="bg-white border border-gray-300 rounded px-4 py-2.5 text-xs w-full sm:w-64 focus:outline-none focus:border-gray-500">
+                <button type="submit" class="bg-gray-900 hover:bg-gray-800 text-white px-6 py-2.5 rounded text-xs font-bold shrink-0 transition">
+                    登録する
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-gray-900 text-gray-300 pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 pb-12 border-b border-gray-800">
+                
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="inline-block border-2 border-white px-3 py-1 font-bold text-white tracking-widest text-lg">LOGO</div>
+                    <p class="text-xs text-gray-400 leading-relaxed pr-4">ブランドのビジョンや企業の合言葉、スローガンなどを簡潔に記載します。</p>
+                </div>
+
+                <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-xs">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">サービス</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">技術サービス</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">クラウドソリューション</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">戦略コンサルティング</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">企業情報</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">会社概要</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">チーム紹介</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition">採用情報</a></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white tracking-wider uppercase text-sm">所在地</h4>
+                        <p class="text-gray-400 leading-relaxed">ダナン市 新都市区 10号通り テクノロジービル<br>代表番号: 0236-123-4567</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                <div>© 2018 - 2026 会社名. All rights reserved.</div>
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <a href="#" class="hover:text-gray-200 transition">プライバシーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">利用規約</a>
+                    <a href="#" class="hover:text-gray-200 transition">クッキーポリシー</a>
+                    <a href="#" class="hover:text-gray-200 transition">サイトマップ</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+</body>
+</html>
